@@ -25,7 +25,10 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render: Readme.md
+skip_render: 
+  - Readme.md
+  - baidu_verify_giAvnxV73x.html
+  - googlebe6df1fd8ea2ce83.html
 
 # Writing
 new_post_name: :year-:month-:day-:title.md # File name of new posts
@@ -71,3 +74,12 @@ deploy:
   type: git
   repo: git@github.com:leim/leim.github.io.git
 
+sitemap:
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
+feed:
+  type: atom
+  path: atom.xml
+  limit: 50
+  hub:
