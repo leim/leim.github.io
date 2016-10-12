@@ -8,5 +8,5 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
 
-Sitemap: http://www.cylong.com/sitemap.xml
-Sitemap: http://www.cylong.com/baidusitemap.xml
+Sitemap: https://menglei.tk/sitemap.xml
+Sitemap: https://menglei.tk/baidusitemap.xml
