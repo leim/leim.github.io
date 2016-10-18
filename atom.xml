@@ -63,7 +63,7 @@
     <link href="https://menglei.tk/2016/10/18/memo/"/>
     <id>https://menglei.tk/2016/10/18/memo/</id>
     <published>2016-10-18T08:11:15.000Z</published>
-    <updated>2016-10-18T10:06:03.000Z</updated>
+    <updated>2016-10-18T10:12:51.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h2><ul>
 <li>官方网站：<a href="https://nodejs.org/" target="_blank" rel="external">https://nodejs.org/</a></li>
@@ -72,16 +72,16 @@
 <h2 id="NPM"><a href="#NPM" class="headerlink" title="NPM"></a>NPM</h2><ul>
 <li>官方网站： <a href="https://www.npmjs.com/" target="_blank" rel="external">https://www.npmjs.com/</a></li>
 <li>Taobao镜像： <a href="https://npm.taobao.org/" target="_blank" rel="external">https://npm.taobao.org/</a></li>
-<li>Mongodb Driver： <a href="https://www.npmjs.com/package/mongodb" target="_blank" rel="external">NPM</a>、<a href="https://github.com/mongodb/node-mongodb-native" target="_blank" rel="external">Github</a></li>
-<li>Mongoose(Mongodb ORM)： [官网]<a href="http://mongoosejs.com/、[NPM](https://www.npmjs.com/package/mongoose)、[Github](https://github.com/Automattic/mongoose" target="_blank" rel="external">http://mongoosejs.com/、[NPM](https://www.npmjs.com/package/mongoose)、[Github](https://github.com/Automattic/mongoose</a>)</li>
-<li>随机数生成： <a href="https://www.npmjs.com/package/hat" target="_blank" rel="external">NPM</a>、<a href="https://github.com/substack/node-hat" target="_blank" rel="external">Github</a></li>
+<li>Mongodb Driver： <a href="https://www.npmjs.com/package/mongodb" target="_blank" rel="external">NPM</a> 、<a href="https://github.com/mongodb/node-mongodb-native" target="_blank" rel="external">Github</a></li>
+<li>Mongoose(Mongodb ORM)： <a href="http://mongoosejs.com/" target="_blank" rel="external">官网</a> 、 <a href="https://www.npmjs.com/package/mongoose" target="_blank" rel="external">NPM</a> 、 <a href="https://github.com/Automattic/mongoose" target="_blank" rel="external">Github</a></li>
+<li>随机数生成： <a href="https://www.npmjs.com/package/hat" target="_blank" rel="external">NPM</a> 、 <a href="https://github.com/substack/node-hat" target="_blank" rel="external">Github</a></li>
 <li>Node.js反向代理：<a href="https://www.npmjs.com/package/http-proxy" target="_blank" rel="external">NPM</a></li>
 </ul>
 <h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><ul>
 <li>W3School中文： <a href="http://www.w3school.com.cn/" target="_blank" rel="external">http://www.w3school.com.cn/</a></li>
 </ul>
 <h2 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h2><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li>Hexo： <a href="https://hexo.io" target="_blank" rel="external">官网</a>、<a href="https://github.com/hexojs/hexo" target="_blank" rel="external">Github</a></li>
+<li>Hexo： <a href="https://hexo.io" target="_blank" rel="external">官网</a> 、<a href="https://github.com/hexojs/hexo" target="_blank" rel="external">Github</a></li>
 </ul>
 ]]></content>
     
