@@ -4,6 +4,50 @@
 
     
   <url>
+    <loc>https://menglei.tk/2016/10/18/memo/</loc>
+    <lastmod>2016-10-18T10:06:03.000Z</lastmod>
+    <data>
+        <display>
+        <title>一些有用资源的备忘</title>
+        <pubTime>2016-10-18T08:11:15.000Z</pubTime>
+        
+        <tag>资源</tag>
+         
+        <tag>备忘</tag>
+         
+         
+           
+             
+              <breadCrumb title="memo" url="https://menglei.tk/categories/memo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://menglei.tk/2016/10/18/certbot/</loc>
+    <lastmod>2016-10-18T09:06:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>Let's Encrypt 配置过程记录</title>
+        <pubTime>2016-10-18T08:25:00.000Z</pubTime>
+        
+        <tag>HTTPS</tag>
+         
+        <tag>Nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="server" url="https://menglei.tk/categories/server/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://menglei.tk/2016/10/10/hello-world/</loc>
     <lastmod>2016-10-10T02:39:25.821Z</lastmod>
     <data>

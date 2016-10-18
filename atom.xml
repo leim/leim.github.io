@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://menglei.tk/"/>
-  <updated>2016-10-10T02:39:25.821Z</updated>
+  <updated>2016-10-18T09:06:21.000Z</updated>
   <id>https://menglei.tk/</id>
   
   <author>
@@ -14,6 +14,92 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Let&#39;s Encrypt 配置过程记录</title>
+    <link href="https://menglei.tk/2016/10/18/certbot/"/>
+    <id>https://menglei.tk/2016/10/18/certbot/</id>
+    <published>2016-10-18T08:25:00.000Z</published>
+    <updated>2016-10-18T09:06:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Let’s Encrypt 是一个免费的SSL证书机构，可以通过Certbot工具进行申请。</p>
+<p>Let’s Encrypt 网站： <a href="https://letsencrypt.org/" target="_blank" rel="external">https://letsencrypt.org/</a></p>
+<p>Certbot 网站： <a href="https://certbot.eff.org/" target="_blank" rel="external">https://certbot.eff.org/</a></p>
+<p>Certbot Github： <a href="https://github.com/certbot/certbot" target="_blank" rel="external">https://github.com/certbot/certbot</a></p>
+<p>测试环境： Ubuntu 14.04， python 2.7， nginx 1.4.6</p>
+<h2 id="申请过程"><a href="#申请过程" class="headerlink" title="申请过程"></a>申请过程</h2><h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h3><p>首先要保证电脑中已经安装了git和nginx，并且能够正确运行。</p>
+<p>安装certbot可以从github上面clone，或者直接从官方提供的下载地址进行下载。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget https://dl.eff.org/certbot-auto</div><div class="line">chmod a+x certbot-auto</div></pre></td></tr></table></figure>
+<h3 id="2-配置"><a href="#2-配置" class="headerlink" title="2.配置"></a>2.配置</h3><p>上面下载到的是一个自动安装脚本，运行这个脚本，会自动下载并安装所需要的各种依赖，下载完成之后，我们可以再次运行这个脚本进行证书的申请。但是，此时可以先创建一个配置文件，省去每次都要输入一长串命令的麻烦。Certbot的配置文件默认存放位置是/etc/letsencrypt/，默认的文件名是cli.ini，所以我们创建一个文件/etc/letencrypt/cli.ini，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">rsa-key-size = 2048  //密钥长度，2048足够</div><div class="line"></div><div class="line">email = foo@example.com  //您的邮箱地址</div><div class="line"></div><div class="line">domains = example.com, www.example.com  //要申请证书的域名，多个域名用逗号分隔</div><div class="line"></div><div class="line">text = True  //是否使用文字交互，如果选false，将使用ncurses交互</div><div class="line"></div><div class="line">authenticator = webroot  //域名的验证方式</div><div class="line">webroot-path = /usr/share/nginx/html   //指定http服务器的root文件夹</div></pre></td></tr></table></figure>
+<h3 id="3-申请"><a href="#3-申请" class="headerlink" title="3.申请"></a>3.申请</h3><p>只要执行 <code>certbot --config /etc/letsencrypt/cli.ini</code> 即可按照cli.ini中的配置内容进行申请证书的操作，申请成功之后，证书文件会存放在 <code>/etc/letsencrypt/archive/example.com</code> 文件夹中，同时，在 <code>/etc/letencrypt/live/example.com/</code> 中，会有相应的软连接，我们在使用的时候，可以直接利用软连接即可，避免续期之后的证书文件名变更导致nginx配置出错。</p>
+<h3 id="4-使用"><a href="#4-使用" class="headerlink" title="4.使用"></a>4.使用</h3><p>在nginx的ssl配置时，按照如下配置即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssl_certificate /etc/letsencrypt/live/appinn.com/fullchain.pem;</div><div class="line">ssl_certificate_key /etc/letsencrypt/live/appinn.com/privkey.pem;</div></pre></td></tr></table></figure>
+<h3 id="5-续期"><a href="#5-续期" class="headerlink" title="5.续期"></a>5.续期</h3><p>由于Let’s Encrypt 证书的有效期只有三个月，我们必须在到期之前对其进行续期。续期的操作是执行命令行 <code>certbot-auto renew</code>。我们可以创建定时任务，保证服务可以一直有效。</p>
+<p>运行 <code>crontab -e</code> ，同时在下面加入一行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">00 3 * * 0 certbot-auto renew</div><div class="line">01 3 * * 0 service nginx reload</div></pre></td></tr></table></figure>
+<p>每周日凌晨三点钟运行续期服务，如果证书即将到期，即可自动对证书进行续期三个月，同时三点零一分会自动重新加载nginx，使得新申请的证书生效。</p>
+<p>这样，HTTPS部分就已经配置完成并且不需要任何操作了，只要服务器一直在运行并且Let’s Encrypt 服务没有出意外，我们的HTTPS就会一直有效下去。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Let’s Encrypt 是一个免费的SSL证书机构，可以通过Certbot工具进行申请。&lt;/p&gt;
+&lt;p&gt;Let’s Encrypt 网站： &lt;a href=&quot;https://letsencrypt.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;
+    
+    </summary>
+    
+      <category term="server" scheme="https://menglei.tk/categories/server/"/>
+    
+    
+      <category term="HTTPS" scheme="https://menglei.tk/tags/HTTPS/"/>
+    
+      <category term="Nginx" scheme="https://menglei.tk/tags/Nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一些有用资源的备忘</title>
+    <link href="https://menglei.tk/2016/10/18/memo/"/>
+    <id>https://menglei.tk/2016/10/18/memo/</id>
+    <published>2016-10-18T08:11:15.000Z</published>
+    <updated>2016-10-18T10:06:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h2><ul>
+<li>官方网站：<a href="https://nodejs.org/" target="_blank" rel="external">https://nodejs.org/</a></li>
+<li>Github： <a href="https://github.com/nodejs/node" target="_blank" rel="external">https://github.com/nodejs/node</a></li>
+</ul>
+<h2 id="NPM"><a href="#NPM" class="headerlink" title="NPM"></a>NPM</h2><ul>
+<li>官方网站： <a href="https://www.npmjs.com/" target="_blank" rel="external">https://www.npmjs.com/</a></li>
+<li>Taobao镜像： <a href="https://npm.taobao.org/" target="_blank" rel="external">https://npm.taobao.org/</a></li>
+<li>Mongodb Driver： <a href="https://www.npmjs.com/package/mongodb" target="_blank" rel="external">NPM</a>、<a href="https://github.com/mongodb/node-mongodb-native" target="_blank" rel="external">Github</a></li>
+<li>Mongoose(Mongodb ORM)： [官网]<a href="http://mongoosejs.com/、[NPM](https://www.npmjs.com/package/mongoose)、[Github](https://github.com/Automattic/mongoose" target="_blank" rel="external">http://mongoosejs.com/、[NPM](https://www.npmjs.com/package/mongoose)、[Github](https://github.com/Automattic/mongoose</a>)</li>
+<li>随机数生成： <a href="https://www.npmjs.com/package/hat" target="_blank" rel="external">NPM</a>、<a href="https://github.com/substack/node-hat" target="_blank" rel="external">Github</a></li>
+<li>Node.js反向代理：<a href="https://www.npmjs.com/package/http-proxy" target="_blank" rel="external">NPM</a></li>
+</ul>
+<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><ul>
+<li>W3School中文： <a href="http://www.w3school.com.cn/" target="_blank" rel="external">http://www.w3school.com.cn/</a></li>
+</ul>
+<h2 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h2><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>Hexo： <a href="https://hexo.io" target="_blank" rel="external">官网</a>、<a href="https://github.com/hexojs/hexo" target="_blank" rel="external">Github</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Node-js&quot;&gt;&lt;a href=&quot;#Node-js&quot; class=&quot;headerlink&quot; title=&quot;Node.js&quot;&gt;&lt;/a&gt;Node.js&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;官方网站：&lt;a href=&quot;https://nodejs.org/&quot; target=&quot;_
+    
+    </summary>
+    
+      <category term="memo" scheme="https://menglei.tk/categories/memo/"/>
+    
+    
+      <category term="资源" scheme="https://menglei.tk/tags/%E8%B5%84%E6%BA%90/"/>
+    
+      <category term="备忘" scheme="https://menglei.tk/tags/%E5%A4%87%E5%BF%98/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
