@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://menglei.tk/"/>
-  <updated>2016-10-19T06:19:54.000Z</updated>
+  <updated>2016-10-18T09:06:21.000Z</updated>
   <id>https://menglei.tk/</id>
   
   <author>
@@ -14,25 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title></title>
-    <link href="https://menglei.tk/2016/10/19/about-index/"/>
-    <id>https://menglei.tk/2016/10/19/about-index/</id>
-    <published>2016-10-19T06:19:47.573Z</published>
-    <updated>2016-10-19T06:19:54.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="姓名"><a href="#姓名" class="headerlink" title="姓名"></a>姓名</h3><p> 孟雷（MengLei）</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;h3 id=&quot;姓名&quot;&gt;&lt;a href=&quot;#姓名&quot; class=&quot;headerlink&quot; title=&quot;姓名&quot;&gt;&lt;/a&gt;姓名&lt;/h3&gt;&lt;p&gt; 孟雷
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>Let&#39;s Encrypt 配置过程记录</title>
