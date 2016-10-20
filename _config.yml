@@ -71,8 +71,10 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
+- type: git
   repo: git@github.com:leim/leim.github.io.git
+- type: git
+  repo: git@git.coding.net:mlei/mlei.git
 
 sitemap:
   path: sitemap.xml
