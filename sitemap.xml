@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://menglei.tk/2016/10/21/nginx/</loc>
+    
+    <lastmod>2016-10-21T09:50:26.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://menglei.tk/2016/10/16/hello-world/</loc>
+    
+    <lastmod>2016-10-21T08:04:51.718Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://menglei.tk/2016/10/18/memo/</loc>
+    
+    <lastmod>2016-10-19T10:17:55.141Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://menglei.tk/about/index.html</loc>
     
     <lastmod>2016-10-19T06:27:10.000Z</lastmod>
@@ -9,23 +30,9 @@
   </url>
   
   <url>
-    <loc>https://menglei.tk/2016/10/18/memo/</loc>
-    
-    <lastmod>2016-10-19T03:42:24.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://menglei.tk/2016/10/18/certbot/</loc>
     
     <lastmod>2016-10-18T09:06:21.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://menglei.tk/2016/10/10/hello-world/</loc>
-    
-    <lastmod>2016-10-10T02:39:25.821Z</lastmod>
     
   </url>
   
