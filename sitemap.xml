@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://menglei.tk/about/index.html</loc>
+    
+    <lastmod>2016-10-21T10:06:52.803Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://menglei.tk/2016/10/21/nginx/</loc>
     
     <lastmod>2016-10-21T09:50:26.000Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>https://menglei.tk/2016/10/18/memo/</loc>
     
     <lastmod>2016-10-19T10:17:55.141Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://menglei.tk/about/index.html</loc>
-    
-    <lastmod>2016-10-19T06:27:10.000Z</lastmod>
     
   </url>
   
