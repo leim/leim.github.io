@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Nginx安装配置备忘 | MengLei Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Nginx是一个俄罗斯开发的高性能HTTP服务器和反向代理服务器，功能丰富、性能强悍、运行稳定、应用广泛，完全使用C语言编写，可运行于各种Unix Like OS，并有Windows移植版本(不推荐用于生产环境)。
+安装在Ubuntu中，可以直接使用sudo apt-get install nginx 命令安装nginx，安装之后，默认的配置文件保存在 /etc/nginx 文件夹内，默认提供ht">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx安装配置备忘">
+<meta property="og:url" content="https://menglei.tk/2016/10/21/nginx/index.html">
+<meta property="og:site_name" content="MengLei Site">
+<meta property="og:description" content="Nginx是一个俄罗斯开发的高性能HTTP服务器和反向代理服务器，功能丰富、性能强悍、运行稳定、应用广泛，完全使用C语言编写，可运行于各种Unix Like OS，并有Windows移植版本(不推荐用于生产环境)。
+安装在Ubuntu中，可以直接使用sudo apt-get install nginx 命令安装nginx，安装之后，默认的配置文件保存在 /etc/nginx 文件夹内，默认提供ht">
+<meta property="og:updated_time" content="2016-10-21T09:50:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nginx安装配置备忘">
+<meta name="twitter:description" content="Nginx是一个俄罗斯开发的高性能HTTP服务器和反向代理服务器，功能丰富、性能强悍、运行稳定、应用广泛，完全使用C语言编写，可运行于各种Unix Like OS，并有Windows移植版本(不推荐用于生产环境)。
+安装在Ubuntu中，可以直接使用sudo apt-get install nginx 命令安装nginx，安装之后，默认的配置文件保存在 /etc/nginx 文件夹内，默认提供ht">
+  
+    <link rel="alternate" href="/atom.xml" title="MengLei Site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">MengLei Site</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A place to memorize something.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://menglei.tk"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-nginx" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/21/nginx/" class="article-date">
+  <time datetime="2016-10-21T08:20:02.000Z" itemprop="datePublished">2016-10-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/server/">server</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Nginx安装配置备忘
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://nginx.org/" target="_blank" rel="external">Nginx</a>是一个俄罗斯开发的高性能HTTP服务器和反向代理服务器，功能丰富、性能强悍、运行稳定、应用广泛，完全使用C语言编写，可运行于各种Unix Like OS，并有Windows移植版本(不推荐用于生产环境)。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在Ubuntu中，可以直接使用<code>sudo apt-get install nginx</code> 命令安装nginx，安装之后，默认的配置文件保存在 <code>/etc/nginx</code> 文件夹内，默认提供http服务的目录位置在 <code>/usr/local/nginx/html</code>。</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>nginx的主配置文件是：nginx.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">user www-data;  #用户与用户组</div><div class="line">worker_processes 4;  #对外提供服务的worker进程数量，取值取决因素包括（但不限于）CPU核的数量、存储数据的硬盘数量及负载模式。默认可设置为CPU内核数或者可设置为“auto”。</div><div class="line">worker_rlimit_nofile 30000;   #worker进程最大打开文件数量限制</div><div class="line">pid /var/run/nginx.pid;     #pid文件保存位置</div><div class="line"></div><div class="line">events &#123;</div><div class="line">        worker_connections 10000;   #单个worker可以最大打开的连接数</div><div class="line">        # multi_accept on;    #收到一个新连接通知后是否接受尽可能多的连接</div><div class="line">&#125;</div><div class="line">http &#123;</div><div class="line"></div><div class="line">        ##</div><div class="line">        # Basic Settings</div><div class="line">        ##</div><div class="line"></div><div class="line">        sendfile on;     #sendfile特性，提高文件访问的效率</div><div class="line">        tcp_nopush on;   #在一个tcp数据包里发送所有的头文件</div><div class="line">        tcp_nodelay on;  #不要缓存数据，立即发送</div><div class="line">        keepalive_timeout 65;    #客户端keep-alive连接的超时时间</div><div class="line">        types_hash_max_size 2048;</div><div class="line">        # server_tokens off;   #是否关闭错误页面中的nginx版本显示</div><div class="line"></div><div class="line">        # server_names_hash_bucket_size 64;</div><div class="line">        # server_name_in_redirect off;</div><div class="line"></div><div class="line">        include /etc/nginx/mime.types;   #特定后缀使用mime types的配置</div><div class="line">        default_type application/octet-stream;   #默认文件mime types</div><div class="line">        client_max_body_size 200m;      #上传文件最大体积</div><div class="line"></div><div class="line">        ##</div><div class="line">        # Logging Settings</div><div class="line">        ##</div><div class="line">        </div><div class="line">        access_log off;   #访问日志记录文件路径</div><div class="line">        error_log /var/log/nginx/error.log;    #错误日志记录文件</div><div class="line"></div><div class="line">        ##</div><div class="line">        # Gzip Settings</div><div class="line">        ##</div><div class="line"></div><div class="line">        gzip on;    #是否启用gzip压缩(可减少流量，增大服务器负载)</div><div class="line">        gzip_disable &quot;msie6&quot;;    #指定客户端禁用gzip</div><div class="line"></div><div class="line">        gzip_vary on;</div><div class="line">        gzip_proxied any;  #允许或者禁止压缩基于请求和响应的响应流。设置为any，意味着将会压缩所有的请求。</div><div class="line">        gzip_comp_level 6;  #压缩等级</div><div class="line">        # gzip_buffers 16 8k;</div><div class="line">        # gzip_http_version 1.1;</div><div class="line">        gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript; #设置需要压缩的数据格式</div><div class="line"></div><div class="line">        server&#123;  #服务器配置</div><div class="line">            listen  80; #端口</div><div class="line">            server_name  example.com;  #域名  </div><div class="line">            location / &#123;</div><div class="line">                root /usr/local/nginx/html;  #根目录</div><div class="line">                index index.html index.htm index.php;  #默认主页文件</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">        ##</div><div class="line">        # Virtual Host Configs</div><div class="line">        ##</div><div class="line"></div><div class="line">        include /etc/nginx/conf.d/*.conf;    #配置</div><div class="line">        include /etc/nginx/sites-enabled/*;  #virutal host配置</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="virutal-host-配置"><a href="#virutal-host-配置" class="headerlink" title="virutal host 配置"></a>virutal host 配置</h1><p>nginx作为反向代理服务器，可以根据域名不同将用户的请求分发给不同的后端服务器，配置文件放置在site-available目录中，如果要启用某一个特定的配置文件，需要在site-enabled目录中建立一个对应的软连接。</p>
+<p>我们想要配置一个<code>api.example.com</code>的虚拟服务器，将特定/api路径下的所有请求转发到后端的api服务器，其他请求直接访问对应的静态文件目录，同时支持HTTP和HTTPS访问，配置如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    server_name api.example.com;  #域名，只有访问这个域名的请求才会被转发到这里</div><div class="line">    listen 80;  #监听端口</div><div class="line">    listen 443 ssl;   #HTTPS监听端口</div><div class="line">    ssl on;   #是否启用HTTPS</div><div class="line">    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;   #HTTPS证书公钥地址，此处为Let&apos;s Encrypt申请的证书</div><div class="line">    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem; #HTTPS证书私钥地址，此处为Let&apos;s Encrypt申请的证书</div><div class="line">    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;   #HTTPS协议版本</div><div class="line">    ssl_prefer_server_ciphers on;   #服务器加密优先于客户端加密</div><div class="line">    ssl_ciphers &apos;EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH&apos;;   #加密算法</div><div class="line">    location ^~ /api/ &#123;  #所有匹配到/api路径下的访问，全部转发</div><div class="line">        proxy_pass http://127.0.0.1:8051/rest/;</div><div class="line">        proxy_set_header Host $http_host;  #转发的请求，HOST取值为客户端访问的host值</div><div class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;  #增加x-Forwarded-for</div><div class="line">        proxy_set_header X-Real-IP $remote_addr;  #增加x-real-ip，取值为访问用户的真实IP，供后端获取客户IP使用</div><div class="line">    &#125;</div><div class="line">    location = /upload &#123;  #只有访问路径等于 /upload 的请求，才会转发到这里</div><div class="line">        proxy_pass http://127.0.0.1:8052/upload/;</div><div class="line">        proxy_set_header Host $http_host;</div><div class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">        proxy_set_header X-Real-IP $remote_addr;</div><div class="line">        client_max_body_size 200m;  #设置最大上传文件体积，单位可以是k、m、g</div><div class="line">    &#125;</div><div class="line">    location ~ /.well-known &#123;   #letsencrypt申请证书验证域名使用的配置目录</div><div class="line">        root /usr/share/nginx/.well-known;</div><div class="line">        index index.html;</div><div class="line">    &#125;</div><div class="line">    location / &#123;  #所有不匹配上面各种条件的请求，都转发到这里</div><div class="line">        root /var/webroot;</div><div class="line">        index index.html index.htm;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>将以上配置保存为 /etc/nginx/sites-available 目录中的 api.example 文件，然后进入site-enabled目录，执行 <code>ln -s ../sites-available/api.example api.example</code> 在sites-enabled中建立其对应的软连接，然后执行 <code>service nginx reload</code> 重新加载nginx的配置，即可生效。</p>
+<h1 id="nginx配置强制跳转HTTPS"><a href="#nginx配置强制跳转HTTPS" class="headerlink" title="nginx配置强制跳转HTTPS"></a>nginx配置强制跳转HTTPS</h1><p>很多网站都要求所有HTTP的访问都强制跳转到HTTPS，其配置方法有很多种，可以按照以下配置思路：</p>
+<p>我们有一个仅支持HTTPS访问的配置好的virtual host：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    server_name www.example.com;</div><div class="line">    listen 443 ssl;</div><div class="line">    ssl on;</div><div class="line">    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;</div><div class="line">    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;</div><div class="line">    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</div><div class="line">    ssl_prefer_server_ciphers on;</div><div class="line">    ssl_ciphers &apos;EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH&apos;;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        root /var/webroot;</div><div class="line">        index index.htm index.html;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>新建一个配置文件www.redirect：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    server_name www.example.com;</div><div class="line">    listen 80;</div><div class="line">    location ~ /.well-known &#123; #letsencrypt申请证书验证域名使用的配置目录</div><div class="line">        root /usr/share/nginx/.well-known;</div><div class="line">        index index.html;</div><div class="line">    &#125;</div><div class="line">    location / &#123; #默认请求</div><div class="line">        root /noexists;  #一个不存在的目录</div><div class="line">        index index.html;  </div><div class="line">    &#125;</div><div class="line">    error_page 404 https://www.example.com/;  #访问文件不存在时，跳转的链接</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在sites-enabled 目录中为以上配置文件设置一个软链接，然后reload nginx即可。</p>
+<p>其思路主要是利用了nginx的404页面，我们为http server配置了一个不存在的路径，这样在访问http服务器的时候，其index.html文件是不存在的，这样nginx就会给用户返回特定的404 Not Found 页面，我们将对应的HTTPS链接指定为其对应的404页面，这样在访问http server的时候，就会被自动redirect到相应的HTTPS页面了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://menglei.tk/2016/10/21/nginx/" data-id="ciuntkevg0003tspb4lkrd61u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTPS/">HTTPS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx/">Nginx</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/10/18/certbot/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Let&#39;s Encrypt 配置过程记录</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/memo/">memo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/server/">server</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/">HTTPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备忘/">备忘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/资源/">资源</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/HTTPS/" style="font-size: 20px;">HTTPS</a> <a href="/tags/Nginx/" style="font-size: 20px;">Nginx</a> <a href="/tags/备忘/" style="font-size: 10px;">备忘</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/21/nginx/">Nginx安装配置备忘</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/18/certbot/">Let&#39;s Encrypt 配置过程记录</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/18/memo/">一些有用资源的备忘</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/16/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Meng Lei<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Allow: /archives/
+
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /vendors/
+Disallow: /fancybox/
+
+Sitemap: https://menglei.tk/sitemap.xml
+Sitemap: https://menglei.tk/baidusitemap.xml

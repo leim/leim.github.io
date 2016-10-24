@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+    
+    
+  <url>
+    <loc>https://menglei.tk/2016/10/21/nginx/</loc>
+    <lastmod>2016-10-21T09:50:26.000Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx安装配置备忘</title>
+        <pubTime>2016-10-21T08:20:02.000Z</pubTime>
+        
+        <tag>HTTPS</tag>
+         
+        <tag>Nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="server" url="https://menglei.tk/categories/server/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://menglei.tk/2016/10/16/hello-world/</loc>
+    <lastmod>2016-10-21T08:04:51.718Z</lastmod>
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2016-10-16T08:11:15.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://menglei.tk/2016/10/18/memo/</loc>
+    <lastmod>2016-10-19T10:17:55.141Z</lastmod>
+    <data>
+        <display>
+        <title>一些有用资源的备忘</title>
+        <pubTime>2016-10-18T08:11:15.000Z</pubTime>
+        
+        <tag>资源</tag>
+         
+        <tag>备忘</tag>
+         
+         
+           
+             
+              <breadCrumb title="memo" url="https://menglei.tk/categories/memo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://menglei.tk/2016/10/18/certbot/</loc>
+    <lastmod>2016-10-18T09:06:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>Let's Encrypt 配置过程记录</title>
+        <pubTime>2016-10-18T08:25:00.000Z</pubTime>
+        
+        <tag>HTTPS</tag>
+         
+        <tag>Nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="server" url="https://menglei.tk/categories/server/"/>
+          
+        </display>
+    </data>
+    </url>
+
+</urlset>
