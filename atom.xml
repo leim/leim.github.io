@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://menglei.tk/"/>
-  <updated>2016-10-21T09:50:26.000Z</updated>
+  <updated>2016-10-26T09:12:26.995Z</updated>
   <id>https://menglei.tk/</id>
   
   <author>
@@ -16,11 +16,70 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Hexo搭建备忘</title>
+    <link href="https://menglei.tk/2016/10/24/hexo/"/>
+    <id>https://menglei.tk/2016/10/24/hexo/</id>
+    <published>2016-10-24T07:04:44.000Z</published>
+    <updated>2016-10-26T09:12:26.995Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="关于Hexo"><a href="#关于Hexo" class="headerlink" title="关于Hexo"></a>关于Hexo</h1><p>Hexo是一款轻量级的HTML静态博客生成器，由Node.js编写，支持Markdown撰写，运行速度快，可以一键部署到Github Pages等托管网站，同时支持插件，可以通过编写插件支持更加丰富的功能。</p>
+<h1 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h1><p>Hexo基于Node.js编写，安装Hexo之前，需要首先确保正确安装了Node.js、npm和Git（参见<a href="https://nodejs.org/" target="_blank" rel="external">Node.js官网</a>、<a href="https://git-scm.com/" target="_blank" rel="external">Git官网</a>），只要运行以下命令即可将Hexo安装到电脑中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-cli -g</div></pre></td></tr></table></figure>
+<h1 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h1><p>安装Hexo成功后，即可创建Hexo工程目录，执行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo init demo</div><div class="line">cd demo</div><div class="line">npm install</div></pre></td></tr></table></figure>
+<p>创建成功后，所包含的目录结构以及功能说明如下：</p>
+<ul>
+<li>_config.yml：网站配置信息。</li>
+<li>packages.json：node_modules模块配置信息。</li>
+<li>scaffolds：模板配置文件夹。</li>
+<li>sources：用户资源，markdown和html会被render并保存至public文件夹供访问，其余文件被直接copy。其中_post文件夹中保存已发布的文章，_draft文件夹中保存草稿。</li>
+<li>themes：主题文件夹。</li>
+</ul>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>网站的所有配置信息保存在_config.yml文件中，可以视情况进行修改。</p>
+<p>具体的配置说明可参见：<a href="https://hexo.io/zh-cn/docs/configuration.html。" target="_blank" rel="external">https://hexo.io/zh-cn/docs/configuration.html。</a></p>
+<h1 id="申请Github-Pages空间"><a href="#申请Github-Pages空间" class="headerlink" title="申请Github Pages空间"></a>申请Github Pages空间</h1><p>在github上面创建一个和repository，名称为 <your user="" name="">.github.io，进入settings，选择options，下面有Github Pages的设置区域，可以选择默认的分支，并且能够自定义域名，这里我们将默认分支设置为master，同时添加自定义域名 <code>menglei.tk</code> ，添加自定义域名之后，下方 enforce https选项变得不可选，因为github无法对自定义域名提供https证书，此处我们可以通过其他方式来对https进行支持。这里填写完自定义域名之后，需要到域名的控制台，为其添加A记录，分别对应IP地址为 192.30.252.153 和 192.30.252.154 。</your></p>
+<p>这样，所有访问自定义域名都会直接请求到该repo的master分支内根目录下的index.html文件。</p>
+<h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>Hexo可以支持git、heroku、Rsync、OpenShift、FTPSync等多种部署方式，如果这里没有提供您所需要的部署方式，可以直接将生成的public文件夹中所有的文件复制到所需要的server root文件夹。</p>
+<p>我们这里采用的是git部署方式，首先需要添加 <code>hexo-deployer-git</code> ，执行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+<p>然后在根目录下的_config.yml文件后面，增加以下配置信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">- type: git</div><div class="line">  repo: &lt;repo url&gt;   //远程repo地址</div><div class="line">  branch: &lt;branch name&gt;  //通过git提交到远程repo的分支</div><div class="line">  message: &lt;push message&gt;  //提交信息</div><div class="line">- type: git</div><div class="line">  repo: &lt;repo url2&gt;  // 可以支持同时部署到多个远程repo</div></pre></td></tr></table></figure>
+<p>这里可以同时支持将其部署到多个repo中，也可以同时支持多种不同的repo类型。</p>
+<h1 id="Sitemap："><a href="#Sitemap：" class="headerlink" title="Sitemap："></a>Sitemap：</h1><p>为了让搜索引擎更好的抓取网站内容，我们这里可以生成sitemap，首先需要执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install hexo-generator-baidu-sitemap --save   //生成百度sitemap</div><div class="line">npm install hexo-generator-sitemap --save    //生成google sitemap</div></pre></td></tr></table></figure>
+<p>然后在根目录_config.yml文件末尾，添加以下配置信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sitemap:</div><div class="line">  path: sitemap.xml</div><div class="line">baidusitemap:</div><div class="line">  path: baidusitemap.xml</div></pre></td></tr></table></figure>
+<p>这样，就可以通过 <a href="http://url/sitemap.xml" target="_blank" rel="external">http://url/sitemap.xml</a> 和 <a href="http://url/baidusitemap.xml" target="_blank" rel="external">http://url/baidusitemap.xml</a> 访问到网站的sitemap了，只要将以上地址提交到google和百度，即可加速搜索引擎抓取，优化网站的收录。</p>
+<h1 id="Feed"><a href="#Feed" class="headerlink" title="Feed"></a>Feed</h1><p>为了给用户提供订阅，可以生成Feed文件，首先要执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-generator-feed --save</div></pre></td></tr></table></figure>
+<p>然后在根目录_config.yml文件中，添加以下配置信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">feed:</div><div class="line">  type: atom</div><div class="line">  path: atom.xml</div><div class="line">  limit: 50</div><div class="line">  hub:</div></pre></td></tr></table></figure>
+<p>这样，就可以通过 <a href="http://url/atom.xml" target="_blank" rel="external">http://url/atom.xml</a> 访问到网站的订阅Feed了。</p>
+<h1 id="HTTPS配置"><a href="#HTTPS配置" class="headerlink" title="HTTPS配置"></a>HTTPS配置</h1><p>如果申请了Github Pages空间只好没有设置自定义域名，那么可以直接使用<your user="" name="">.github.io访问网站，并且可以启用enforce https选项强制所有用户使用https访问。但是设置自定义域名之后，必须采用一些其他方式，这里我们采用的是cloudflare免费CDN功能。</your></p>
+<p>CloudFlare提供用户免费的CDN加速功能，并且支持HTTPS加速，所以，我们先申请一个cloudflare的账号，添加域名，然后到原域名供应商处将其dns服务器设置为cloudflare的dns服务器：kai.ns.cloudflare.com 和     naomi.ns.cloudflare.com 。然后将原来的dns record全都转移过来，同时，对于指向github pages的域名对应的两条A记录，启用CDN功能，这样，所有访问您github pages网站的请求，都会被cloudflare中转加速，免费的账户支持添加三条page rules，我们添加一条即可，配置域名，选择always use https，同时启用该条规则，这样，所有访问http的请求，都会被强制转向https，此处的https证书是cloudflare免费提供的，用户不必担心使用有效期，也不必承担费用。</p>
+<p>同时，cloudflare还有很多高级功能可以免费使用，比如访问统计，防火墙，数据分析等，大家可以慢慢摸索。</p>
+<h1 id="Ending"><a href="#Ending" class="headerlink" title="Ending"></a>Ending</h1><p>至此，所有的配置工作都已经完成，可以愉快的进行写作了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;关于Hexo&quot;&gt;&lt;a href=&quot;#关于Hexo&quot; class=&quot;headerlink&quot; title=&quot;关于Hexo&quot;&gt;&lt;/a&gt;关于Hexo&lt;/h1&gt;&lt;p&gt;Hexo是一款轻量级的HTML静态博客生成器，由Node.js编写，支持Markdown撰写，运行速度快，可
+    
+    </summary>
+    
+      <category term="memo" scheme="https://menglei.tk/categories/memo/"/>
+    
+    
+      <category term="备忘" scheme="https://menglei.tk/tags/%E5%A4%87%E5%BF%98/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Nginx安装配置备忘</title>
     <link href="https://menglei.tk/2016/10/21/nginx/"/>
     <id>https://menglei.tk/2016/10/21/nginx/</id>
     <published>2016-10-21T08:20:02.000Z</published>
-    <updated>2016-10-21T09:50:26.000Z</updated>
+    <updated>2016-10-24T08:59:49.573Z</updated>
     
     <content type="html"><![CDATA[<p><a href="http://nginx.org/" target="_blank" rel="external">Nginx</a>是一个俄罗斯开发的高性能HTTP服务器和反向代理服务器，功能丰富、性能强悍、运行稳定、应用广泛，完全使用C语言编写，可运行于各种Unix Like OS，并有Windows移植版本(不推荐用于生产环境)。</p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在Ubuntu中，可以直接使用<code>sudo apt-get install nginx</code> 命令安装nginx，安装之后，默认的配置文件保存在 <code>/etc/nginx</code> 文件夹内，默认提供http服务的目录位置在 <code>/usr/local/nginx/html</code>。</p>
@@ -57,7 +116,7 @@
     <link href="https://menglei.tk/2016/10/18/certbot/"/>
     <id>https://menglei.tk/2016/10/18/certbot/</id>
     <published>2016-10-18T08:25:00.000Z</published>
-    <updated>2016-10-18T09:06:21.000Z</updated>
+    <updated>2016-10-24T08:59:49.521Z</updated>
     
     <content type="html"><![CDATA[<p>Let’s Encrypt 是一个免费的SSL证书机构，可以通过Certbot工具进行申请。</p>
 <p>Let’s Encrypt 网站： <a href="https://letsencrypt.org/" target="_blank" rel="external">https://letsencrypt.org/</a></p>
@@ -100,7 +159,7 @@
     <link href="https://menglei.tk/2016/10/18/memo/"/>
     <id>https://menglei.tk/2016/10/18/memo/</id>
     <published>2016-10-18T08:11:15.000Z</published>
-    <updated>2016-10-19T10:17:55.141Z</updated>
+    <updated>2016-10-24T08:59:49.549Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h2><ul>
 <li>官方网站：<a href="https://nodejs.org/" target="_blank" rel="external">https://nodejs.org/</a></li>
@@ -141,9 +200,9 @@
       <category term="memo" scheme="https://menglei.tk/categories/memo/"/>
     
     
-      <category term="资源" scheme="https://menglei.tk/tags/%E8%B5%84%E6%BA%90/"/>
-    
       <category term="备忘" scheme="https://menglei.tk/tags/%E5%A4%87%E5%BF%98/"/>
+    
+      <category term="资源" scheme="https://menglei.tk/tags/%E8%B5%84%E6%BA%90/"/>
     
   </entry>
   
@@ -152,7 +211,7 @@
     <link href="https://menglei.tk/2016/10/16/hello-world/"/>
     <id>https://menglei.tk/2016/10/16/hello-world/</id>
     <published>2016-10-16T08:11:15.000Z</published>
-    <updated>2016-10-21T08:04:51.718Z</updated>
+    <updated>2016-10-24T08:59:49.583Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
