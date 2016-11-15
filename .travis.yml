@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - "4.6"
+
+branches:
+only:
+  - hexo
+  
+  # command to install dependencies
+install: 
+  - echo $travis_key > ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
+  - npm install -g hexo
+  - npm install
+  - git config --global user.name "leim"
+  - git config --global user.email 773984215@qq.com
+
+# command to run tests
+script: 
+  - hexo clean
+  - hexo deploy -g
