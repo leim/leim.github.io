@@ -10,6 +10,12 @@ script:
   - hexo g
  
 after_script:
+  - git init
+  - git config user.name "mlei"
+  - git config user.email "773984215@qq.com"
+  - git add .
+  - git commit -m "auto sync repository"
+  - git push --force --quiet "https://${deploy_gitlab}@gitlab.com/mlei/mlei.git" hexo: hexo
   - cd ./public
   - git init
   - git config user.name "leim"
