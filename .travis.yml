@@ -1,21 +1,24 @@
 language: node_js
-node_js:
-  - "4.6"
-
-branches:
-only:
-  - hexo
-  
-  # command to install dependencies
-install: 
-  - echo $travis_key > ~/.ssh/id_rsa
-  - chmod 600 ~/.ssh/id_rsa
-  - npm install -g hexo
+node_js: stable
+ 
+install:
+  - npm install hexo -g
   - npm install
-  - git config --global user.name "leim"
-  - git config --global user.email 773984215@qq.com
+ 
+ 
+script:
+  - hexo g
+ 
+after_script:
+  - cd ./public
+  - git init
+  - git config user.name "leim"
+  - git config user.email "z@menglei.tk"
+  - git add .
+  - git commit -m "auto update docs by travis ci"
+  - git push --force --quiet "https://${deploy_github_public_repo}@github.com/leim/leim.github.io.git" master:master
+ 
+branches:
+  only:
+    - hexo
 
-# command to run tests
-script: 
-  - hexo clean
-  - hexo deploy -g
