@@ -13,6 +13,8 @@ tags:
 
 与Github Pages相似，Gitlab Pages也是一个用来托管静态文件的服务，由Gitlab提供，通过与Gitlab CI和Gitlab Runner集成，将用户个人、组织以及项目的页面部署到静态文件服务当中。
 
+Gitlab Pages是从Gitlab EE 8.3版本才引入的，自定义CNAME和TLS支持是从Gitlab EE 8.5版本中引入的，由于我们没有Gitlab EE 环境，此处我们使用Gitlab.com提供免费服务。
+
 # 开始使用Gitlab Pages
 
  通常来说，有两种类型的pages
