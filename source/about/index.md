@@ -18,5 +18,5 @@ date: 2016-10-17 20:00:00
  https://github.com/leim
  
 ### Skills
- Javascript, Node.js, Mongodb, Linux, SQL, C#, Windows Phone, Windows Metro, etc.
+ Javascript, Node.js, HTML, Mongodb, Linux, SQL, C#.Net, Windows Phone, Windows Metro, etc.
  
