@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+    
+  <url>
+    <loc>https://menglei.tk/2017/01/17/gitlab/</loc>
+    <lastmod>2017-01-19T04:21:28.601Z</lastmod>
+    <data>
+        <display>
+        <title>关于Gitlab服务器的搭建</title>
+        <pubTime>2017-01-17T10:29:39.000Z</pubTime>
+        
+        <tag>备忘</tag>
+         
+        <tag>GIT</tag>
+         
+        <tag>持续集成</tag>
+         
+         
+           
+             
+              <breadCrumb title="memo" url="https://menglei.tk/categories/memo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://menglei.tk/2017/01/18/gitlab-runner/</loc>
+    <lastmod>2017-01-19T04:21:28.601Z</lastmod>
+    <data>
+        <display>
+        <title>安装Gitlab Runner</title>
+        <pubTime>2017-01-18T11:56:32.000Z</pubTime>
+        
+        <tag>备忘</tag>
+         
+        <tag>GIT</tag>
+         
+        <tag>持续集成</tag>
+         
+         
+           
+             
+              <breadCrumb title="memo" url="https://menglei.tk/categories/memo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://menglei.tk/2016/10/16/hello-world/</loc>
+    <lastmod>2017-01-19T04:21:28.601Z</lastmod>
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2016-10-16T16:11:15.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://menglei.tk/2016/11/07/mkdocs/</loc>
+    <lastmod>2017-01-19T04:21:28.597Z</lastmod>
+    <data>
+        <display>
+        <title>MkDocs备忘</title>
+        <pubTime>2016-11-07T11:29:19.000Z</pubTime>
+        
+        <tag>备忘</tag>
+         
+        <tag>API</tag>
+         
+         
+           
+             
+              <breadCrumb title="memo" url="https://menglei.tk/categories/memo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://menglei.tk/2016/12/05/travis/</loc>
+    <lastmod>2017-01-19T04:21:28.597Z</lastmod>
+    <data>
+        <display>
+        <title>Use Hexo With Travis Ci</title>
+        <pubTime>2016-12-05T08:45:09.000Z</pubTime>
+        
+        <tag>备忘</tag>
+         
+        <tag>GIT</tag>
+         
+        <tag>持续集成</tag>
+         
+         
+           
+             
+              <breadCrumb title="memo" url="https://menglei.tk/categories/memo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://menglei.tk/2016/10/18/certbot/</loc>
+    <lastmod>2017-01-19T04:21:28.597Z</lastmod>
+    <data>
+        <display>
+        <title>Let's Encrypt 配置过程记录</title>
+        <pubTime>2016-10-18T16:25:00.000Z</pubTime>
+        
+        <tag>HTTPS</tag>
+         
+        <tag>Nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="server" url="https://menglei.tk/categories/server/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://menglei.tk/2017/01/02/nginx-websocket/</loc>
+    <lastmod>2017-01-19T04:21:28.597Z</lastmod>
+    <data>
+        <display>
+        <title>WebSocket的实现以及通过Nginx进行反向代理</title>
+        <pubTime>2017-01-02T13:29:36.000Z</pubTime>
+        
+        <tag>HTTPS</tag>
+         
+        <tag>Nginx</tag>
+         
+        <tag>WebSocket</tag>
+         
+         
+           
+             
+              <breadCrumb title="server" url="https://menglei.tk/categories/server/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://menglei.tk/2016/10/24/hexo/</loc>
+    <lastmod>2017-01-19T04:21:28.597Z</lastmod>
+    <data>
+        <display>
+        <title>Hexo搭建备忘</title>
+        <pubTime>2016-10-24T15:04:44.000Z</pubTime>
+        
+        <tag>备忘</tag>
+         
+         
+           
+             
+              <breadCrumb title="memo" url="https://menglei.tk/categories/memo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://menglei.tk/2016/10/18/memo/</loc>
+    <lastmod>2017-01-19T04:21:28.597Z</lastmod>
+    <data>
+        <display>
+        <title>一些有用资源的备忘</title>
+        <pubTime>2016-10-18T16:11:15.000Z</pubTime>
+        
+        <tag>资源</tag>
+         
+        <tag>备忘</tag>
+         
+         
+           
+             
+              <breadCrumb title="memo" url="https://menglei.tk/categories/memo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://menglei.tk/2016/10/21/nginx/</loc>
+    <lastmod>2017-01-19T04:21:28.597Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx安装配置备忘</title>
+        <pubTime>2016-10-21T16:20:02.000Z</pubTime>
+        
+        <tag>HTTPS</tag>
+         
+        <tag>Nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="server" url="https://menglei.tk/categories/server/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://menglei.tk/2016/10/29/youknow/</loc>
+    <lastmod>2017-01-19T04:21:28.597Z</lastmod>
+    <data>
+        <display>
+        <title>关于代理服务器的一些备忘</title>
+        <pubTime>2016-10-29T17:11:51.000Z</pubTime>
+        
+        <tag>备忘</tag>
+         
+        <tag>proxy</tag>
+         
+        <tag>Node.js</tag>
+         
+         
+           
+             
+              <breadCrumb title="memo" url="https://menglei.tk/categories/memo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://menglei.tk/2016/12/12/gitlab-pages/</loc>
+    <lastmod>2017-01-19T04:21:28.597Z</lastmod>
+    <data>
+        <display>
+        <title>使用Gitlab Pages建立个人博客</title>
+        <pubTime>2016-12-12T10:50:36.000Z</pubTime>
+        
+        <tag>备忘</tag>
+         
+        <tag>GIT</tag>
+         
+        <tag>GitLab</tag>
+         
+         
+           
+             
+              <breadCrumb title="memo" url="https://menglei.tk/categories/memo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+</urlset>

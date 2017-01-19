@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用Gitlab Pages建立个人博客 | MengLei Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="关于Gitlab Pages与Github Pages相似，Gitlab Pages也是一个用来托管静态文件的服务，由Gitlab提供，通过与Gitlab CI和Gitlab Runner集成，将用户个人、组织以及项目的页面部署到静态文件服务当中。
+Gitlab Pages是从Gitlab EE 8.3版本才引入的，自定义CNAME和TLS支持是从Gitlab EE 8.5版本中引入的，由于我们没">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Gitlab Pages建立个人博客">
+<meta property="og:url" content="https://menglei.tk/2016/12/12/gitlab-pages/index.html">
+<meta property="og:site_name" content="MengLei Site">
+<meta property="og:description" content="关于Gitlab Pages与Github Pages相似，Gitlab Pages也是一个用来托管静态文件的服务，由Gitlab提供，通过与Gitlab CI和Gitlab Runner集成，将用户个人、组织以及项目的页面部署到静态文件服务当中。
+Gitlab Pages是从Gitlab EE 8.3版本才引入的，自定义CNAME和TLS支持是从Gitlab EE 8.5版本中引入的，由于我们没">
+<meta property="og:updated_time" content="2017-01-19T04:21:28.597Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Gitlab Pages建立个人博客">
+<meta name="twitter:description" content="关于Gitlab Pages与Github Pages相似，Gitlab Pages也是一个用来托管静态文件的服务，由Gitlab提供，通过与Gitlab CI和Gitlab Runner集成，将用户个人、组织以及项目的页面部署到静态文件服务当中。
+Gitlab Pages是从Gitlab EE 8.3版本才引入的，自定义CNAME和TLS支持是从Gitlab EE 8.5版本中引入的，由于我们没">
+  
+    <link rel="alternate" href="/atom.xml" title="MengLei Site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">MengLei Site</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A place to memorize something.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://menglei.tk"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-gitlab-pages" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/12/gitlab-pages/" class="article-date">
+  <time datetime="2016-12-12T10:50:36.000Z" itemprop="datePublished">2016-12-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/memo/">memo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用Gitlab Pages建立个人博客
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="关于Gitlab-Pages"><a href="#关于Gitlab-Pages" class="headerlink" title="关于Gitlab Pages"></a>关于Gitlab Pages</h1><p>与Github Pages相似，Gitlab Pages也是一个用来托管静态文件的服务，由Gitlab提供，通过与Gitlab CI和Gitlab Runner集成，将用户个人、组织以及项目的页面部署到静态文件服务当中。</p>
+<p>Gitlab Pages是从Gitlab EE 8.3版本才引入的，自定义CNAME和TLS支持是从Gitlab EE 8.5版本中引入的，由于我们没有Gitlab EE 环境，此处我们使用Gitlab.com提供免费服务。</p>
+<h1 id="开始使用Gitlab-Pages"><a href="#开始使用Gitlab-Pages" class="headerlink" title="开始使用Gitlab Pages"></a>开始使用Gitlab Pages</h1><p> 通常来说，有两种类型的pages</p>
+<ul>
+<li>用户页面(<code>username.exmaple.io</code>)或者组织页面(<code>groupname.exmaple.io</code>)</li>
+<li>项目页面(<code>username.exmaple.io/projectname</code>)或者(<code>groupname.exmaple.io/projectname</code>)</li>
+</ul>
+<p>在一个Gitlab实例中，用户名或者组织名是唯一的，所以我们可以将其当作命名空间使用，下面表格展示了不同类型的Gitlab Pages与他们的项目名称的关系以及最终URL的展现形式：</p>
+<table>
+<thead>
+<tr>
+<th>Gitlab Pages类型</th>
+<th>Gitlab中的项目名称</th>
+<th>网站URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用户页面</td>
+<td><code>username.exmaple.io</code></td>
+<td><code>http(s)://username.exmaple.io</code></td>
+</tr>
+<tr>
+<td>组织页面</td>
+<td><code>groupname.exmaple.io</code></td>
+<td><code>http(s)://groupname.exmaple.io</code></td>
+</tr>
+<tr>
+<td>用户项目页面</td>
+<td><code>projectname</code></td>
+<td><code>http(s)://username.exmaple.io/projectname</code></td>
+</tr>
+<tr>
+<td>组织项目页面</td>
+<td><code>projectname</code></td>
+<td><code>http(s)://groupname.exmaple.io/projectname</code></td>
+</tr>
+</tbody>
+</table>
+<h1 id="使用Gitlab-Pages的基本流程"><a href="#使用Gitlab-Pages的基本流程" class="headerlink" title="使用Gitlab Pages的基本流程"></a>使用Gitlab Pages的基本流程</h1><p>简单的说，使用Gitlab Pages 需要以下几步：</p>
+<ul>
+<li>从管理员处得到Gitlab Pages的域名(gitlab.com的对应域名为gitlab.io)，这一步非常重要，所以您必须确保首先获得正确的域名。</li>
+<li>创建一个项目。</li>
+<li>向该工程根目录中推送一个<code>.gitlab-ci.yml</code>文件。</li>
+<li>建立一个Gitlab Runner用来构建您的服务。</li>
+</ul>
+<h1 id="搭建个人博客"><a href="#搭建个人博客" class="headerlink" title="搭建个人博客"></a>搭建个人博客</h1><p>下面要在Gitlab.com上搭建免费的个人博客，由于我的用户名是mlei，所以建立一个工程，名为mlei.gitlab.io。并将此工程克隆至本地。</p>
+<p>将github pages工程的hexo分支内源码复制到该工程目录下，然后新建一个.gitlab-ci.yml文件，其内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">image: node:4.2.2</div><div class="line"></div><div class="line">pages:</div><div class="line">  cache:</div><div class="line">    paths:</div><div class="line">    - node_modules/</div><div class="line"></div><div class="line">  script:</div><div class="line">  - npm install hexo-cli -g</div><div class="line">  - npm install</div><div class="line">  - hexo generate</div><div class="line">  artifacts:</div><div class="line">    paths:</div><div class="line">    - public</div><div class="line">  only:</div><div class="line">  - master</div></pre></td></tr></table></figure>
+<p>提交所有更改，然后将代码库push到远程，Gitlab会自动识别.gitlab-ci.yml中的配置并执行其中的操作，执行完毕后，访问<code>http://mlei.gitlab.io</code>即可访问我的博客。</p>
+<h1 id="同步Github-Pages内容"><a href="#同步Github-Pages内容" class="headerlink" title="同步Github Pages内容"></a>同步Github Pages内容</h1><p>每次提交Github Pages之后都要将博客源代码文件复制到Gitlab Pages的工程下面，然后再提交，显然这种重复的体力劳动是不需要人力去完成的，我们可以在travis CI中设置相应的操作，让其自动将代码提交至Gitlab版本库中，但是Gitlab提供了一个更加简便快捷的方法：镜像版本库(Mirror repository)。</p>
+<p>点击工程的设置按钮，找到<code>Mirror  Repository</code>菜单栏，点击进入，一共提供了两种选择，一共是将该版本库当作其他项目的镜像，每小时同步一次内容，另一种是将该版本库当作主版本库，每次提交之后，将其内容同步至其他版本库，我们此处用的是前者。</p>
+<p>只要将Mirror repository的复选框勾选，然后填入我的Github pages的地址，确认即可，此时，自动同步功能已经开启。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://menglei.tk/2016/12/12/gitlab-pages/" data-id="ciy3vf1rb000cfn1nez9kkg1j" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GIT/">GIT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitLab/">GitLab</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/备忘/">备忘</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/01/02/nginx-websocket/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          WebSocket的实现以及通过Nginx进行反向代理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/05/travis/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Use Hexo With Travis Ci</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/memo/">memo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/server/">server</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitLab/">GitLab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/">HTTPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSocket/">WebSocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备忘/">备忘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/资源/">资源</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/GIT/" style="font-size: 16.67px;">GIT</a> <a href="/tags/GitLab/" style="font-size: 10px;">GitLab</a> <a href="/tags/HTTPS/" style="font-size: 13.33px;">HTTPS</a> <a href="/tags/Nginx/" style="font-size: 13.33px;">Nginx</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/备忘/" style="font-size: 20px;">备忘</a> <a href="/tags/持续集成/" style="font-size: 13.33px;">持续集成</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/01/18/gitlab-runner/">安装Gitlab Runner</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/17/gitlab/">关于Gitlab服务器的搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/02/nginx-websocket/">WebSocket的实现以及通过Nginx进行反向代理</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/12/gitlab-pages/">使用Gitlab Pages建立个人博客</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/05/travis/">Use Hexo With Travis Ci</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Meng Lei<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+image: node:4.2.2
+
+pages:
+  script:
+  - npm install hexo-cli -g
+  - npm install
+  - hexo generate
+  artifacts:
+    paths:
+    - public
+  only:
+  - hexo

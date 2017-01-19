@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Let&#39;s Encrypt 配置过程记录 | MengLei Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Let’s Encrypt 是一个免费的SSL证书机构，可以通过Certbot工具进行申请。
+Let’s Encrypt 网站： https://letsencrypt.org/
+Certbot 网站： https://certbot.eff.org/
+Certbot Github： https://github.com/certbot/certbot
+测试环境： Ubuntu 14.04， py">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Let's Encrypt 配置过程记录">
+<meta property="og:url" content="https://menglei.tk/2016/10/18/certbot/index.html">
+<meta property="og:site_name" content="MengLei Site">
+<meta property="og:description" content="Let’s Encrypt 是一个免费的SSL证书机构，可以通过Certbot工具进行申请。
+Let’s Encrypt 网站： https://letsencrypt.org/
+Certbot 网站： https://certbot.eff.org/
+Certbot Github： https://github.com/certbot/certbot
+测试环境： Ubuntu 14.04， py">
+<meta property="og:updated_time" content="2017-01-19T04:21:28.597Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Let's Encrypt 配置过程记录">
+<meta name="twitter:description" content="Let’s Encrypt 是一个免费的SSL证书机构，可以通过Certbot工具进行申请。
+Let’s Encrypt 网站： https://letsencrypt.org/
+Certbot 网站： https://certbot.eff.org/
+Certbot Github： https://github.com/certbot/certbot
+测试环境： Ubuntu 14.04， py">
+  
+    <link rel="alternate" href="/atom.xml" title="MengLei Site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">MengLei Site</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A place to memorize something.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://menglei.tk"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-certbot" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/18/certbot/" class="article-date">
+  <time datetime="2016-10-18T16:25:00.000Z" itemprop="datePublished">2016-10-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/server/">server</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Let&#39;s Encrypt 配置过程记录
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Let’s Encrypt 是一个免费的SSL证书机构，可以通过Certbot工具进行申请。</p>
+<p>Let’s Encrypt 网站： <a href="https://letsencrypt.org/" target="_blank" rel="external">https://letsencrypt.org/</a></p>
+<p>Certbot 网站： <a href="https://certbot.eff.org/" target="_blank" rel="external">https://certbot.eff.org/</a></p>
+<p>Certbot Github： <a href="https://github.com/certbot/certbot" target="_blank" rel="external">https://github.com/certbot/certbot</a></p>
+<p>测试环境： Ubuntu 14.04， python 2.7， nginx 1.4.6</p>
+<h2 id="申请过程"><a href="#申请过程" class="headerlink" title="申请过程"></a>申请过程</h2><h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h3><p>首先要保证电脑中已经安装了git和nginx，并且能够正确运行。</p>
+<p>安装certbot可以从github上面clone，或者直接从官方提供的下载地址进行下载。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget https://dl.eff.org/certbot-auto</div><div class="line">chmod a+x certbot-auto</div></pre></td></tr></table></figure>
+<h3 id="2-配置"><a href="#2-配置" class="headerlink" title="2.配置"></a>2.配置</h3><p>上面下载到的是一个自动安装脚本，运行这个脚本，会自动下载并安装所需要的各种依赖，下载完成之后，我们可以再次运行这个脚本进行证书的申请。但是，此时可以先创建一个配置文件，省去每次都要输入一长串命令的麻烦。Certbot的配置文件默认存放位置是/etc/letsencrypt/，默认的文件名是cli.ini，所以我们创建一个文件/etc/letencrypt/cli.ini，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">rsa-key-size = 2048  //密钥长度，2048足够</div><div class="line"></div><div class="line">email = foo@example.com  //您的邮箱地址</div><div class="line"></div><div class="line">domains = example.com, www.example.com  //要申请证书的域名，多个域名用逗号分隔</div><div class="line"></div><div class="line">text = True  //是否使用文字交互，如果选false，将使用ncurses交互</div><div class="line"></div><div class="line">authenticator = webroot  //域名的验证方式</div><div class="line">webroot-path = /usr/share/nginx/html   //指定http服务器的root文件夹</div></pre></td></tr></table></figure>
+<h3 id="3-申请"><a href="#3-申请" class="headerlink" title="3.申请"></a>3.申请</h3><p>只要执行 <code>certbot --config /etc/letsencrypt/cli.ini</code> 即可按照cli.ini中的配置内容进行申请证书的操作，申请成功之后，证书文件会存放在 <code>/etc/letsencrypt/archive/example.com</code> 文件夹中，同时，在 <code>/etc/letencrypt/live/example.com/</code> 中，会有相应的软连接，我们在使用的时候，可以直接利用软连接即可，避免续期之后的证书文件名变更导致nginx配置出错。</p>
+<h3 id="4-使用"><a href="#4-使用" class="headerlink" title="4.使用"></a>4.使用</h3><p>在nginx的ssl配置时，按照如下配置即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssl_certificate /etc/letsencrypt/live/appinn.com/fullchain.pem;</div><div class="line">ssl_certificate_key /etc/letsencrypt/live/appinn.com/privkey.pem;</div></pre></td></tr></table></figure>
+<h3 id="5-续期"><a href="#5-续期" class="headerlink" title="5.续期"></a>5.续期</h3><p>由于Let’s Encrypt 证书的有效期只有三个月，我们必须在到期之前对其进行续期。续期的操作是执行命令行 <code>certbot-auto renew</code>。我们可以创建定时任务，保证服务可以一直有效。</p>
+<p>运行 <code>crontab -e</code> ，同时在下面加入一行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">00 3 * * 0 certbot-auto renew</div><div class="line">01 3 * * 0 service nginx reload</div></pre></td></tr></table></figure>
+<p>每周日凌晨三点钟运行续期服务，如果证书即将到期，即可自动对证书进行续期三个月，同时三点零一分会自动重新加载nginx，使得新申请的证书生效。</p>
+<p>这样，HTTPS部分就已经配置完成并且不需要任何操作了，只要服务器一直在运行并且Let’s Encrypt 服务没有出意外，我们的HTTPS就会一直有效下去。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://menglei.tk/2016/10/18/certbot/" data-id="ciy3vf1qi0002fn1nvnuks5wq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTPS/">HTTPS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx/">Nginx</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/10/21/nginx/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Nginx安装配置备忘
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/18/memo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">一些有用资源的备忘</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/memo/">memo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/server/">server</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitLab/">GitLab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/">HTTPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSocket/">WebSocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备忘/">备忘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/资源/">资源</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/GIT/" style="font-size: 16.67px;">GIT</a> <a href="/tags/GitLab/" style="font-size: 10px;">GitLab</a> <a href="/tags/HTTPS/" style="font-size: 13.33px;">HTTPS</a> <a href="/tags/Nginx/" style="font-size: 13.33px;">Nginx</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/备忘/" style="font-size: 20px;">备忘</a> <a href="/tags/持续集成/" style="font-size: 13.33px;">持续集成</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/01/18/gitlab-runner/">安装Gitlab Runner</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/17/gitlab/">关于Gitlab服务器的搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/02/nginx-websocket/">WebSocket的实现以及通过Nginx进行反向代理</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/12/gitlab-pages/">使用Gitlab Pages建立个人博客</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/05/travis/">Use Hexo With Travis Ci</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Meng Lei<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

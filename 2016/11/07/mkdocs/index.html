@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MkDocs备忘 | MengLei Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="MkDocsMkDocs（官网、Github）是一款使用python开发的轻量级静态站点生成器，主要用于生成api文档，使用markdown撰写，使用yaml作为配置文件。
+安装首先需要安装python以及pip，然后使用pip即可安装MkDocs。
+123sudo apt-get install pythonsudo apt-get install python-pipsudo pip inst">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MkDocs备忘">
+<meta property="og:url" content="https://menglei.tk/2016/11/07/mkdocs/index.html">
+<meta property="og:site_name" content="MengLei Site">
+<meta property="og:description" content="MkDocsMkDocs（官网、Github）是一款使用python开发的轻量级静态站点生成器，主要用于生成api文档，使用markdown撰写，使用yaml作为配置文件。
+安装首先需要安装python以及pip，然后使用pip即可安装MkDocs。
+123sudo apt-get install pythonsudo apt-get install python-pipsudo pip inst">
+<meta property="og:updated_time" content="2017-01-19T04:21:28.597Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MkDocs备忘">
+<meta name="twitter:description" content="MkDocsMkDocs（官网、Github）是一款使用python开发的轻量级静态站点生成器，主要用于生成api文档，使用markdown撰写，使用yaml作为配置文件。
+安装首先需要安装python以及pip，然后使用pip即可安装MkDocs。
+123sudo apt-get install pythonsudo apt-get install python-pipsudo pip inst">
+  
+    <link rel="alternate" href="/atom.xml" title="MengLei Site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">MengLei Site</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A place to memorize something.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://menglei.tk"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-mkdocs" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/07/mkdocs/" class="article-date">
+  <time datetime="2016-11-07T11:29:19.000Z" itemprop="datePublished">2016-11-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/memo/">memo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MkDocs备忘
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MkDocs"><a href="#MkDocs" class="headerlink" title="MkDocs"></a>MkDocs</h1><p>MkDocs（<a href="http://www.mkdocs.org/" target="_blank" rel="external">官网</a>、<a href="https://github.com/mkdocs/mkdocs/" target="_blank" rel="external">Github</a>）是一款使用python开发的轻量级静态站点生成器，主要用于生成api文档，使用markdown撰写，使用yaml作为配置文件。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>首先需要安装python以及pip，然后使用pip即可安装MkDocs。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install python</div><div class="line">sudo apt-get install python-pip</div><div class="line">sudo pip install mkdocs</div></pre></td></tr></table></figure>
+<p>安装完成之后，可以执行命令<code>mkdocs --version</code>查看所安装版本。</p>
+<h1 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h1><p>执行以下命令新建一个工程。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdocs new demo</div><div class="line">cd demo</div></pre></td></tr></table></figure>
+<p>生成的目录里结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── mkdocs.yml</div><div class="line">└── docs</div><div class="line">    └── index.md</div></pre></td></tr></table></figure>
+<p>其中包含了 <code>mkdocs.yml</code>  工程配置文件以及源文件目录：docs，在源文件目录docs下有一个文件index.html，是一个默认的首页文件。</p>
+<p>控制台进入到与 <code>mkdocs.yml</code> 和 <code>docs</code> 同一级的目录中，运行 <code>mkdocs serve</code>，启动内置的http服务器，在浏览器中打开 <code>http://127.0.0.1:4000</code> ，就会看到<code>docs/index.md</code>渲染之后的页面。内置的http服务器会在我们修改工程内的任意文件的时候检测变化，自动刷新并载入修改后的文件。</p>
+<h1 id="详细配置"><a href="#详细配置" class="headerlink" title="详细配置"></a>详细配置</h1><p>所有的配置可以在 <code>mkdocs.yml</code> 文件中编辑，默认 <code>mkdocs.yml</code> 中只有一个字段 <code>site_name</code> 是必填的，其余字段均为选填。各个字段的详细说明如下：</p>
+<h2 id="site-name"><a href="#site-name" class="headerlink" title="site_name"></a>site_name</h2><p>文档的主标题，配置文件 <code>mkdocs.yml</code> 中唯一的必填字段。</p>
+<h2 id="site-url"><a href="#site-url" class="headerlink" title="site_url"></a>site_url</h2><p>站点的URL，渲染后的HTML头部会带有包含该URL的link标签。默认null。</p>
+<h2 id="repo-url"><a href="#repo-url" class="headerlink" title="repo_url"></a>repo_url</h2><p>版本库的URL，如果设置该项，每页都会添加一个版本库的URL链接。默认null。</p>
+<h2 id="repo-name"><a href="#repo-name" class="headerlink" title="repo_name"></a>repo_name</h2><p>版本库的名字，如果设置的话，会在每个页面显示一个指向github或者bitbucket的链接。如果repo_url符合对应规则，会默认显示 <code>Github</code> 或者 <code>Bitbucket</code>，否则会是null。</p>
+<h2 id="edit-url"><a href="#edit-url" class="headerlink" title="edit_url"></a>edit_url</h2><p>编辑链接，如果设置，会在每个页面显示一个链接，点击链接会直接指向修改页面的地址。默认null。</p>
+<h2 id="site-description"><a href="#site-description" class="headerlink" title="site_description"></a>site_description</h2><p>站点的描述，如果设置该项，渲染后的HTML头部会带有包含该描述的meta标签。</p>
+<h2 id="site-author"><a href="#site-author" class="headerlink" title="site_author"></a>site_author</h2><p>站点的作者，如果设置该项，选然后的HTML头部会带有包含该项的meta标签。</p>
+<h2 id="site-favicon"><a href="#site-favicon" class="headerlink" title="site_favicon"></a>site_favicon</h2><p>站点的favicon相对docs目录的路径。</p>
+<h2 id="copyright"><a href="#copyright" class="headerlink" title="copyright"></a>copyright</h2><p>站点的版权信息。</p>
+<h2 id="docs-dir"><a href="#docs-dir" class="headerlink" title="docs_dir"></a>docs_dir</h2><p>源文件所在目录相对 <code>mkdocs.yml</code> 的路径，默认 <code>docs</code>。</p>
+<h2 id="site-dir"><a href="#site-dir" class="headerlink" title="site_dir"></a>site_dir</h2><p>生成的HTML文件相对 <code>mkdocs.yml</code> 的路径，默认 <code>site</code>。</p>
+<h2 id="theme"><a href="#theme" class="headerlink" title="theme"></a>theme</h2><p>站点生成HTML所用的主题，内置主题有mkdocs、readthedocs，默认mkdocs。</p>
+<h2 id="pages"><a href="#pages" class="headerlink" title="pages"></a>pages</h2><p>站点的目录结构。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">pages:</div><div class="line">    - &apos;Introduction&apos;: &apos;index.md&apos;</div><div class="line">    - &apos;User Guide&apos;: &apos;user-guide.md&apos;</div><div class="line">    - &apos;About&apos;: &apos;about.md&apos;</div></pre></td></tr></table></figure>
+<h2 id="use-directory-urls"><a href="#use-directory-urls" class="headerlink" title="use_directory_urls"></a>use_directory_urls</h2><p>站点的链接类型。</p>
+<table>
+<thead>
+<tr>
+<th>Source file</th>
+<th>Generated HTML</th>
+<th>use_directory_urls=true</th>
+<th>use_directory_urls=false</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>index.md</td>
+<td>index.html</td>
+<td>/</td>
+<td>/index.html</td>
+</tr>
+<tr>
+<td>api-guide.md</td>
+<td>api-guide/index.html</td>
+<td>/api-guide/</td>
+<td>/api-guide/index.html</td>
+</tr>
+<tr>
+<td>about.md</td>
+<td>about/index.html</td>
+<td>/about/</td>
+<td>/about/index.html</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://menglei.tk/2016/11/07/mkdocs/" data-id="ciy3vf1r40007fn1nq4octi2f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/API/">API</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/备忘/">备忘</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/12/05/travis/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Use Hexo With Travis Ci
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/29/youknow/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">关于代理服务器的一些备忘</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/memo/">memo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/server/">server</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitLab/">GitLab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/">HTTPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSocket/">WebSocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备忘/">备忘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/资源/">资源</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/GIT/" style="font-size: 16.67px;">GIT</a> <a href="/tags/GitLab/" style="font-size: 10px;">GitLab</a> <a href="/tags/HTTPS/" style="font-size: 13.33px;">HTTPS</a> <a href="/tags/Nginx/" style="font-size: 13.33px;">Nginx</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/备忘/" style="font-size: 20px;">备忘</a> <a href="/tags/持续集成/" style="font-size: 13.33px;">持续集成</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/01/18/gitlab-runner/">安装Gitlab Runner</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/17/gitlab/">关于Gitlab服务器的搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/02/nginx-websocket/">WebSocket的实现以及通过Nginx进行反向代理</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/12/gitlab-pages/">使用Gitlab Pages建立个人博客</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/05/travis/">Use Hexo With Travis Ci</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Meng Lei<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Use Hexo With Travis Ci | MengLei Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Travis CI 简介Travis CI是一个分步式的开源持续构建项目，只需要通过配置.travis.yml文件，即可将Github上的项目进行持续的编译、测试等工作，以便尽早发现错误，尽早改正，并减少人工的重复劳动。同时，也可以通过travis ci完成很多有趣的工作。
+通过Travis CI自动发布hexo博客我们建立的hexo博客，每次写完一篇，都要执行 hexo generate 和 h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Use Hexo With Travis Ci">
+<meta property="og:url" content="https://menglei.tk/2016/12/05/travis/index.html">
+<meta property="og:site_name" content="MengLei Site">
+<meta property="og:description" content="Travis CI 简介Travis CI是一个分步式的开源持续构建项目，只需要通过配置.travis.yml文件，即可将Github上的项目进行持续的编译、测试等工作，以便尽早发现错误，尽早改正，并减少人工的重复劳动。同时，也可以通过travis ci完成很多有趣的工作。
+通过Travis CI自动发布hexo博客我们建立的hexo博客，每次写完一篇，都要执行 hexo generate 和 h">
+<meta property="og:updated_time" content="2017-01-19T04:21:28.597Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Use Hexo With Travis Ci">
+<meta name="twitter:description" content="Travis CI 简介Travis CI是一个分步式的开源持续构建项目，只需要通过配置.travis.yml文件，即可将Github上的项目进行持续的编译、测试等工作，以便尽早发现错误，尽早改正，并减少人工的重复劳动。同时，也可以通过travis ci完成很多有趣的工作。
+通过Travis CI自动发布hexo博客我们建立的hexo博客，每次写完一篇，都要执行 hexo generate 和 h">
+  
+    <link rel="alternate" href="/atom.xml" title="MengLei Site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">MengLei Site</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A place to memorize something.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://menglei.tk"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-travis" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/05/travis/" class="article-date">
+  <time datetime="2016-12-05T08:45:09.000Z" itemprop="datePublished">2016-12-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/memo/">memo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Use Hexo With Travis Ci
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Travis-CI-简介"><a href="#Travis-CI-简介" class="headerlink" title="Travis CI 简介"></a>Travis CI 简介</h1><p>Travis CI是一个分步式的开源持续构建项目，只需要通过配置.travis.yml文件，即可将Github上的项目进行持续的编译、测试等工作，以便尽早发现错误，尽早改正，并减少人工的重复劳动。同时，也可以通过travis ci完成很多有趣的工作。</p>
+<h1 id="通过Travis-CI自动发布hexo博客"><a href="#通过Travis-CI自动发布hexo博客" class="headerlink" title="通过Travis CI自动发布hexo博客"></a>通过Travis CI自动发布hexo博客</h1><p>我们建立的hexo博客，每次写完一篇，都要执行 <code>hexo generate</code> 和 <code>hexo deploy</code> 等命令，将博客生成的HTML静态文件部署到Github的版本库上，同时，也会将源代码保存一份到Github的另一个分支，每次都要执行很多重复操作，在此，我们可以通过Travis CI来帮我们完成这些重复劳动。</p>
+<h2 id="为项目启用Travis-CI功能"><a href="#为项目启用Travis-CI功能" class="headerlink" title="为项目启用Travis CI功能"></a>为项目启用Travis CI功能</h2><p>首先打开<code>https://travis-ci.org</code>并选择使用Github授权登陆，登陆成功之后，进入<code>https://travis-ci.org/profile/</code>，可以看到用户Github账户下的所有公开的版本库，如果没有显示，就点击右上角“Sync account”按钮，将项目列表同步过来，我们选择github page所在的版本库(本人的为：leim/leim.github.io)，点击左侧的toggle button即可启用。</p>
+<p>此时我们再回到Github的<code>leim/leim.github.io</code>版本库下，点击<code>Settings-&gt;Integrations &amp; services</code>，即可看到Travis CI已经在列表中了，表明Travis CI功能已经成功启用。</p>
+<h2 id="Github-Personal-Access-Token"><a href="#Github-Personal-Access-Token" class="headerlink" title="Github Personal Access Token"></a>Github Personal Access Token</h2><p>在Github点击右上角头像，然后点击<code>Settings</code>，进入个人设置，点击<code>Personal access token</code>，然后点击<code>Generate new token</code>，我们需要生成一个具有push权限的access token，所以选择讲repo下的public_repo前面打勾，同时将此token备注为public_repo_deploy，表明其作用，确认之后牢记此token，因为它只会显示这一次，一旦忘记只能进行重置，无法找回。</p>
+<h2 id="配置Travis-CI"><a href="#配置Travis-CI" class="headerlink" title="配置Travis CI"></a>配置Travis CI</h2><p> 再次回到Travis CI，可以看到列表中的<code>leim\leim.github.io</code>已经在那里了，我们点击右侧<code>More options -&gt; Settings</code>，可以看到设置页面，有一些配置选项：</p>
+<ul>
+<li>Build only if .travis.yml is present：表示只有在<code>.travis.yml</code>文件存在的分支发生变更才开始运行构建。</li>
+<li>Build pushes：表示push事件可以触发构建。</li>
+<li>Limit concurrent jobs：限制同时运行的构建数。</li>
+<li>Build pull request：表示pull事件可以触发构建。</li>
+<li>Environment Variables：配置所需的环境变量，主要是一些保密信息。</li>
+<li>Cron Jobs：除了按照特定事件触发构建外，也可以根据设置定时触发构建任务。</li>
+</ul>
+<p>我们讲上一步得到的 personal access token复制到 Environment Variables中，并命名为<code>deploy_github_public_repo</code>然后保存。</p>
+<p>至此所有的设置工作全部完成。</p>
+<h1 id="编写-travis-yml文件"><a href="#编写-travis-yml文件" class="headerlink" title="编写.travis.yml文件"></a>编写.travis.yml文件</h1><p>.travis.yml文件是Travis CI的所有动作的描述文件，当然我们也要将所需要做的工作写在该文件中。其主要内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">language: node_js   //构建环境</div><div class="line">node_js: stable     //版本</div><div class="line"> </div><div class="line">install:   //安装依赖</div><div class="line">  - npm install hexo -g</div><div class="line">  - npm install</div><div class="line"> </div><div class="line"> </div><div class="line">script:   //执行脚本</div><div class="line">  - hexo g</div><div class="line"> </div><div class="line">after_script:   //脚本执行成功之后，部署代码</div><div class="line">  - cd ./public</div><div class="line">  - git init</div><div class="line">  - git config user.name &quot;leim&quot;</div><div class="line">  - git config user.email &quot;z@menglei.tk&quot;</div><div class="line">  - git add .</div><div class="line">  - git commit -m &quot;auto update docs by travis ci&quot;</div><div class="line">  //$&#123;deploy_github_public_repo&#125;为设置在环境变量中的access token，此处通过https提交更改到master分支</div><div class="line">  - git push --force --quiet &quot;https://$&#123;deploy_github_public_repo&#125;@github.com/leim/leim.github.io.git&quot; master:master</div><div class="line"> </div><div class="line">branches:</div><div class="line">  only:</div><div class="line">    - hexo   //仅hexo分支触发该构建</div></pre></td></tr></table></figure>
+<p>到这一步，所有的工作就全部完成了，接下来，我们可以新建一篇文章，然后将整个博客的代码部分commit 并 push 到hexo分支，即可自动触发travis CI的持续构建服务，自动生成HTML静态文件并提交到master分支，此时博客网站即自动更新完毕。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://menglei.tk/2016/12/05/travis/" data-id="ciy3vf1r6000afn1n0x9a01gr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GIT/">GIT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/备忘/">备忘</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/持续集成/">持续集成</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/12/12/gitlab-pages/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          使用Gitlab Pages建立个人博客
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/11/07/mkdocs/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MkDocs备忘</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/memo/">memo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/server/">server</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitLab/">GitLab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/">HTTPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSocket/">WebSocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备忘/">备忘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/资源/">资源</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/GIT/" style="font-size: 16.67px;">GIT</a> <a href="/tags/GitLab/" style="font-size: 10px;">GitLab</a> <a href="/tags/HTTPS/" style="font-size: 13.33px;">HTTPS</a> <a href="/tags/Nginx/" style="font-size: 13.33px;">Nginx</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/备忘/" style="font-size: 20px;">备忘</a> <a href="/tags/持续集成/" style="font-size: 13.33px;">持续集成</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/01/18/gitlab-runner/">安装Gitlab Runner</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/17/gitlab/">关于Gitlab服务器的搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/02/nginx-websocket/">WebSocket的实现以及通过Nginx进行反向代理</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/12/gitlab-pages/">使用Gitlab Pages建立个人博客</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/05/travis/">Use Hexo With Travis Ci</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Meng Lei<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

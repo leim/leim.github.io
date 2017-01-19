@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MengLei Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Hello World.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MengLei Site">
+<meta property="og:url" content="https://menglei.tk/index.html">
+<meta property="og:site_name" content="MengLei Site">
+<meta property="og:description" content="Hello World.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MengLei Site">
+<meta name="twitter:description" content="Hello World.">
+  
+    <link rel="alternate" href="/atom.xml" title="MengLei Site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">MengLei Site</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A place to memorize something.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://menglei.tk"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-gitlab-runner" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/18/gitlab-runner/" class="article-date">
+  <time datetime="2017-01-18T11:56:32.000Z" itemprop="datePublished">2017-01-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/memo/">memo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/18/gitlab-runner/">安装Gitlab Runner</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Gitlab-CI-简介"><a href="#Gitlab-CI-简介" class="headerlink" title="Gitlab CI 简介"></a>Gitlab CI 简介</h1><p>Gitlab中集成了CI (Continuous Integration：持续集成) 和CD (Continuous Delivery：持续交付) 来方便用户测试、构建、部署代码。它是Gitlab的一部分，用户可以在 <a href="https://gitlab.com/" target="_blank" rel="external">Gitlab.com</a> 上免费使用，同时也包含在了开源的Gitlab社区版和付费的Gitlab企业版中。</p>
+<h2 id="Gitlab-CI具有如下特性："><a href="#Gitlab-CI具有如下特性：" class="headerlink" title="Gitlab CI具有如下特性："></a>Gitlab CI具有如下特性：</h2><ul>
+<li><strong>多平台</strong>：您可以在任何支持Go语言的平台上运行，例如：Unix、Windows、OSX等。</li>
+<li><strong>多语言</strong>：构建脚本是通过命令行驱动的，可以支持诸如Java、PHP、Ruby、C等任何语言。</li>
+<li><strong>稳定</strong>：您的构建操作可以运行在其他机器上，而不是Gitlab上。</li>
+<li><strong>并行构建</strong>：为了加快构建速度，Gitlab CI将任务分别运行在多个不同机器上。</li>
+<li><strong>实时日志</strong>：可以通过链接查看到实时更新的构建日志。</li>
+<li><strong>版本化的测试</strong>：每个人都可以对<code>.gitlab-ci.yml</code>文件提交修改以确保每个分支都能够得到所需要的测试。</li>
+<li><strong>管道</strong>：您可以为每个阶段定义多个任务并且触发其他构建操作。</li>
+<li><strong>弹性运行</strong>：可以自动增加或者减少虚拟机的数量以保证所有的构建操作都立即执行并且代价最小。</li>
+<li><strong>编译好的文件</strong>：您可以上传二进制代码以及其他编译好的文件，并且能够浏览以及下载他们。</li>
+<li><strong>本地测试</strong>：Gitlab中有多个线程池，您可以利用它们运行本地测试。</li>
+<li><strong>Docker支持</strong>：您可以很容易的将其他的Docker容器服务集成进来作为测试的一部分，并且能够构建docker镜像。</li>
+</ul>
+<p>Gitlab CI是Gitlab的一部分，它是一个带有api的web应用程序，可以将运行状态都保存在数据库中，除了Gitlab的功能外，它也能管理项目的构建过程，并且提供了一个很友好的用户界面。</p>
+<p>Gitlab Runner是一个执行构建操作的应用程序，他能够被单独部署到其他机器上，通过API与Gitlab CI协作运行。Gitlab Runner可以被部署到任何支持Go语言二进制文件运行的环境中，例如Linux、OSX、Windows、FreeBSD以及Docker。它也能够测试任何编程语言书写的代码，例如.Net、Java、Python、C、PHP等等。</p>
+<p>为了运行测试功能，您需要至少一个Gitlab实例和一个Gitlab Runner。</p>
+<h1 id="安装Gitlab-Runner"><a href="#安装Gitlab-Runner" class="headerlink" title="安装Gitlab Runner"></a>安装Gitlab Runner</h1><p>安装Gitlab Runner可以有三种方法，通过Docker安装、下载二进制文件手动安装以及使用Gitlab提供的rpm/deb包通过包管理系统进行安装。我们使用第三种方式，也是Gitlab官方推荐的安装方式，目前Gitlab支持Debian、Ubuntu、RHEL以及CentOS的包管理工具安装。</p>
+<p>如果您想使用Docker runner，那么必须要在安装Gitlab Runner之前安装它。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -sSL https://get.docker.com/ | sh</div></pre></td></tr></table></figure></p>
+<p>通过 apt-get 或者 yum 添加Gitlab官方软件源。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># For Debian/Ubuntu</div><div class="line">curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-ci-multi-runner/script.deb.sh | sudo bash</div><div class="line"></div><div class="line"># For RHEL/CentOS</div><div class="line">curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-ci-multi-runner/script.rpm.sh | sudo bash</div></pre></td></tr></table></figure></p>
+<h3 id="覆盖APT设置-仅Debian系统"><a href="#覆盖APT设置-仅Debian系统" class="headerlink" title="覆盖APT设置-仅Debian系统"></a>覆盖APT设置-仅Debian系统</h3><p>自从Debian Stretch开始，Debian维护者添加了一个和我们软件包具有相同名称的一个他们的官方软件包，并且默认情况下官方的软件仓库拥有优先权，如果您想使用Gitlab的软件包，那么必须手动设置软件包的安装源，最佳方法就是添加一个额外的配置文件覆盖掉原来的配置。接下来的每一个版本的更新，无论是手动更新还是自动更新，都将会使用同样的软件源。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cat &gt; /etc/apt/preferences.d/pin-gitlab-runner.pref &lt;&lt;EOF</div><div class="line">Explanation: Prefer GitLab provided packages over the Debian native ones</div><div class="line">Package: gitlab-ci-multi-runner</div><div class="line">Pin: origin packages.gitlab.com</div><div class="line">Pin-Priority: 1001</div><div class="line">EOF</div></pre></td></tr></table></figure>
+<p># </p>
+<h3 id="安装gitlab-ci-multi-runner："><a href="#安装gitlab-ci-multi-runner：" class="headerlink" title="安装gitlab-ci-multi-runner："></a>安装<code>gitlab-ci-multi-runner</code>：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># For Debian/Ubuntu</div><div class="line">sudo apt-get install gitlab-ci-multi-runner</div><div class="line"></div><div class="line"># For RHEL/CentOS</div><div class="line">sudo yum install gitlab-ci-multi-runner</div></pre></td></tr></table></figure>
+<h3 id="注册runner"><a href="#注册runner" class="headerlink" title="注册runner"></a>注册runner</h3><p>此处需要使用一个token，使用管理员账号登陆gitlab并到<code>http://gitlab.exmaple.com/admin/runners</code> 可以查到，详细的说明可以通过查阅 <a href="http://doc.gitlab.com/ce/ci/runners/README.html" target="_blank" rel="external">runner文档</a> 学习。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">sudo gitlab-ci-multi-runner register</div><div class="line"></div><div class="line">Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com )</div><div class="line">https://gitlab.com</div><div class="line">Please enter the gitlab-ci token for this runner</div><div class="line">xxx</div><div class="line">Please enter the gitlab-ci description for this runner</div><div class="line">my-runner</div><div class="line">INFO[0034] fcf5c619 Registering runner... succeeded</div><div class="line">Please enter the executor: shell, docker, docker-ssh, ssh?</div><div class="line">docker</div><div class="line">Please enter the Docker image (eg. ruby:2.1):</div><div class="line">ruby:2.1</div><div class="line">INFO[0037] Runner registered successfully. Feel free to start it, but if it&apos;s</div><div class="line">running already the config should be automatically reloaded!</div></pre></td></tr></table></figure>
+<p>执行完上述命令之后，使用管理员账号登陆gitlab并到<code>http://gitlab.exmaple.com/admin/runners</code>即可查看到已经注册好的gitlab runner。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://menglei.tk/2017/01/18/gitlab-runner/" data-id="ciy3vf1rn000qfn1nlala78ob" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GIT/">GIT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/备忘/">备忘</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/持续集成/">持续集成</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-gitlab" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/17/gitlab/" class="article-date">
+  <time datetime="2017-01-17T10:29:39.000Z" itemprop="datePublished">2017-01-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/memo/">memo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/17/gitlab/">关于Gitlab服务器的搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Gitlab简介"><a href="#Gitlab简介" class="headerlink" title="Gitlab简介"></a>Gitlab简介</h1><p>Gitlab 是一个用于管理GIT代码库的项目，提供权限管理、代码review、问题跟踪、wiki以及持续集成等多种功能，Gitlab 一共提供四种版本可供用户选择，分别是</p>
+<ul>
+<li>Gitlab Community Edition (CE)：社区版，免费，用户自行托管，通过社区提供技术支持</li>
+<li>Gitlab Enterprise Edition (EE)：企业版，付费，用户自行托管，提供附加的功能以及技术支持</li>
+<li>Gitlab.com：免费的SaaS服务，可以创建共有以及私有的版本库，可以购买额外的技术支持</li>
+<li>GitHost.io：由Gitlab提供的用户私有的独享服务</li>
+</ul>
+<p>我们使用的是Gitlab CE版本。</p>
+<h1 id="Gitlab安装"><a href="#Gitlab安装" class="headerlink" title="Gitlab安装"></a>Gitlab安装</h1><p>Gitlab的安装非常简单，首先访问下载地址：<code>https://about.gitlab.com/downloads/</code>，选择对应的操作系统类型，我们使用的是Ubuntu 16.04，也就是Gitlab官方推荐的运行环境，然后就会跳转到对应的安装说明，按照说明一步一步安装即可。</p>
+<h2 id="安装所需要的依赖项"><a href="#安装所需要的依赖项" class="headerlink" title="安装所需要的依赖项"></a>安装所需要的依赖项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install curl openssh-server ca-certificates postfix</div></pre></td></tr></table></figure>
+<h2 id="添加gitlab源并安装"><a href="#添加gitlab源并安装" class="headerlink" title="添加gitlab源并安装"></a>添加gitlab源并安装</h2><p>目前最新的版本是8.13.11</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl -sS https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash</div><div class="line">sudo apt-get install gitlab-ce</div></pre></td></tr></table></figure>
+<p>如果不想通过脚本进行安装，也可以直接下载gitlab的deb包，通过dpkg命令进行安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl -LJO https://packages.gitlab.com/gitlab/gitlab-ce/packages/ubuntu/xenial/gitlab-ce-XXX.deb/download</div><div class="line">dpkg -i gitlab-ce-XXX.deb</div></pre></td></tr></table></figure>
+<h2 id="配置并启动gitlab"><a href="#配置并启动gitlab" class="headerlink" title="配置并启动gitlab"></a>配置并启动gitlab</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gitlab-ctl reconfigure</div></pre></td></tr></table></figure>
+<p>执行完上述命令后，即可通过IP或者域名访问Gitlab，初次访问，会提示用户设置一个至少八位的管理员密码，用户名为root，今后这就是本系统的第一个用户，拥有最高的管理员权限。使用用户名root和刚刚设置的密码登陆之后，就可以进行一系列的设置了。</p>
+<h1 id="Gitlab-配置"><a href="#Gitlab-配置" class="headerlink" title="Gitlab 配置"></a>Gitlab 配置</h1><p>以上只是Gitlab的默认配置，如果需要更加自定义的配置Gitlab，就需要执行以下操作了。</p>
+<h2 id="配置外部访问URL"><a href="#配置外部访问URL" class="headerlink" title="配置外部访问URL"></a>配置外部访问URL</h2><p>为了能够正确显示代码库的下载地址，Gitlab需要知道用户使用的是什么地址来进行访问的，例如：<code>http://gitlab.example.com</code>，在<code>/etc/gitlab/gitlab.rb</code>中添加或者编辑如下参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">external_url &quot;http://gitlab.example.com&quot;</div></pre></td></tr></table></figure></p>
+<p>运行<code>sudo gitlab-ctl reconfigure</code>使更改生效。</p>
+<h2 id="配置URL相对路径"><a href="#配置URL相对路径" class="headerlink" title="配置URL相对路径"></a>配置URL相对路径</h2><p>注意：相对路径的特性是在8.5版本才加入的，目前处于实验状态。</p>
+<p>尽管Gitlab推荐用户将其安装在独有的域名之下，但是由于种种原因，这种做法并不一定总是可行，所以，Gitlab可以安装在相对路径之下，例如：<code>http://exmaple.com/gitlab</code>。</p>
+<p>需要注意的是，修改了URL之后，所有的远程地址都会改变，所以您必须要在所有的本地版本库中手动修改指向您gitlab实例的所有远程地址。</p>
+<h3 id="相对路径的系统需求"><a href="#相对路径的系统需求" class="headerlink" title="相对路径的系统需求"></a>相对路径的系统需求</h3><p>由于Gitlab安装包内含有已经编译好的资源文件（CSS、JavaScript、字体等），如果您配置Gitlab的相对路径，这些资源都需要被重新编译，这项任务将耗费相当一部分CPU和内存资源，为了避免资源耗尽导致出错，您的系统必须拥有至少2GB的可用内存，当然，Gitlab推荐至少要有4GB的内存和4核或者8核的CPU。</p>
+<h3 id="启动Gitlab的相对路径"><a href="#启动Gitlab的相对路径" class="headerlink" title="启动Gitlab的相对路径"></a>启动Gitlab的相对路径</h3><p>启动相对路径功能需要按照以下步骤进行操作：</p>
+<ul>
+<li><p>1.(可选)如果系统资源不足，可以通过以下命令关闭Unicorn和Sidekiq来释放一部分内存。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo gitlab-ctl stop unicorn</div><div class="line">sudo gitlab-ctl stop sidekiq</div></pre></td></tr></table></figure>
+</li>
+<li><p>2.在<code>/etc/gitlab/gitlab.rb</code>中设置<code>external_url</code>参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">external_url &quot;https://example.com/gitlab&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在本例中，Gitlab将会运行在相对路径<code>/gitlab</code>下，用户可以根据自己的需求进行设置。</p>
+<ul>
+<li><p>3.重新运行配置命令使更改生效</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gitlab-ctl reconfigure</div></pre></td></tr></table></figure>
+</li>
+<li><p>4.如果您在第一步中关闭了Unicorn和Sidekiq，此处需要重启。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gitlab-ctl restart</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="关闭Gitlab的相对路径"><a href="#关闭Gitlab的相对路径" class="headerlink" title="关闭Gitlab的相对路径"></a>关闭Gitlab的相对路径</h3><p>关闭相对路径功能，只需要按照以上的操作一步一步进行即可，并且将<code>external_url</code>设置为不包含相对路径即可，当配置完成之后，您可能需要单独运行以下命令重启Unicorn。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gitlab-ctl restart unicorn</div></pre></td></tr></table></figure></p>
+<h2 id="使用非root用户调用外部配置文件"><a href="#使用非root用户调用外部配置文件" class="headerlink" title="使用非root用户调用外部配置文件"></a>使用非root用户调用外部配置文件</h2><p>Gitlab从<code>/etc/gitlab/gitlab.rb</code>处加载配置文件，该文件仅能够被root用户访问，但是在特定情况下，是允许用户以非root形式访问配置文件的，那么就需要在<code>/etc/gitlab/gitlab.rb</code>中配置如下的路径：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">from_file &quot;/home/admin/external_gitlab.rb&quot;</div></pre></td></tr></table></figure></p>
+<p>需要注意的是，如果是以root权限运行的<code>sudo gitlab-ctl reconfigure</code>，那么，任何<code>/etc/gitlab/gitlab.rb</code>文件中<code>from_file</code>之后的配置项将会覆盖外部配置文件中的配置。</p>
+<h2 id="在其他位置保存Git数据"><a href="#在其他位置保存Git数据" class="headerlink" title="在其他位置保存Git数据"></a>在其他位置保存Git数据</h2><p>默认情况下，Gitlab会将所有数据保存在<code>/var/opt/gitlab/git-data</code>，所有的版本库会保存在其中的一个子目录<code>repositories</code>，我们可以通过修改<code>/etc/gitlab/gitlab.rb</code>中的<code>git-data</code>来改变其保存位置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git_data_dirs(&#123;&quot;default&quot; =&gt; &quot;/mnt/nas/git-data&quot;&#125;)</div></pre></td></tr></table></figure></p>
+<p>自从Gitlab 8.10版本以来，也可以通过修改<code>/etc/gitlab/gitlab.rb</code>来将Git数据保存在不止一个目录中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git_data_dirs(&#123;</div><div class="line">  &quot;default&quot; =&gt; &quot;/var/opt/gitlab/git-data&quot;,</div><div class="line">  &quot;alternative&quot; =&gt; &quot;/mnt/nas/git-data&quot;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>注意：所有的目录以及子目录都不能是软连接。</p>
+<p>运行<code>sudo gitlab-ctl reconfigure</code>来使配置生效。</p>
+<p>如果之前在<code>/var/opt/gitlab/git-data</code>中已经有版本库，需要按照如下操作将其移动到新的位置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"># Prevent users from writing to the repositories while you move them.</div><div class="line">sudo gitlab-ctl stop</div><div class="line"></div><div class="line"># Note there is _no_ slash behind &apos;repositories&apos;, but there _is_ a</div><div class="line"># slash behind &apos;git-data&apos;.</div><div class="line">sudo rsync -av /var/opt/gitlab/git-data/repositories /mnt/nas/git-data/</div><div class="line"></div><div class="line"># Start the necessary processes and run reconfigure to fix permissions</div><div class="line"># if necessary</div><div class="line">sudo gitlab-ctl upgrade</div><div class="line"></div><div class="line"># Double-check directory layout in /mnt/nas/git-data. Expected output:</div><div class="line"># repositories</div><div class="line">sudo ls /mnt/nas/git-data/</div><div class="line"></div><div class="line"># Done! Start GitLab and verify that you can browse through the repositories in</div><div class="line"># the web interface.</div><div class="line">sudo gitlab-ctl start</div></pre></td></tr></table></figure></p>
+<h2 id="启用HTTPS"><a href="#启用HTTPS" class="headerlink" title="启用HTTPS"></a>启用HTTPS</h2><p>默认情况下，Gitlab并未启用HTTPS，如果需要使用HTTPS，那么首先要修改<code>/etc/gitlab/gitlab.rb</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># note the &apos;https&apos; below</div><div class="line">external_url &quot;https://gitlab.example.com&quot;</div></pre></td></tr></table></figure></p>
+<p>由于主机名是’gitlab.exmaple.com’，Gitlab将会搜索<code>/etc/gitlab/ssl/gitlab.example.com.key</code>和<code>/etc/gitlab/ssl/gitlab.example.com.crt</code>两个文件作为证书和加密密钥，相应的，我们要创建目录<code>/etc/gitlab/ssl</code>并将证书文件复制到此处。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo mkdir -p /etc/gitlab/ssl</div><div class="line">sudo chmod 700 /etc/gitlab/ssl</div><div class="line">sudo cp gitlab.example.com.key gitlab.example.com.crt /etc/gitlab/ssl/</div></pre></td></tr></table></figure></p>
+<p>现在即可运行<code>sudo gitlab-ctl reconfigure</code>，当配置结束，即可通过<code>https://gitlab.example.com</code>访问gitlab。</p>
+<p>如果您正在运行防火墙，则必须要启用443端口以便HTTPS流量可以通过。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># UFW example (Debian, Ubuntu)</div><div class="line">sudo ufw allow https</div><div class="line"></div><div class="line"># lokkit example (RedHat, CentOS 6)</div><div class="line">sudo lokkit -s https</div><div class="line"></div><div class="line"># firewall-cmd (RedHat, Centos 7)</div><div class="line">sudo firewall-cmd --permanent --add-service=https</div><div class="line">sudo systemctl reload firewalld</div></pre></td></tr></table></figure></p>
+<p>默认情况下，当<code>external_url</code>配置以https开头的时候，Nginx便不再监听HTTP的80端口，如果想要将所有的HTTP请求都重定向给HTTPS，那么需要使用<code>redirect_http_to_https</code>配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">external_url &quot;https://gitlab.example.com&quot;</div><div class="line">nginx[&apos;redirect_http_to_https&apos;] = true</div></pre></td></tr></table></figure></p>
+<h1 id="Gitlab的备份与迁移"><a href="#Gitlab的备份与迁移" class="headerlink" title="Gitlab的备份与迁移"></a>Gitlab的备份与迁移</h1><h2 id="备份Gitlab"><a href="#备份Gitlab" class="headerlink" title="备份Gitlab"></a>备份Gitlab</h2><p>Gitlab的备份非常简单，只需要一条命令即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gitlab-rake gitlab:backup:create</div></pre></td></tr></table></figure></p>
+<p>使用以上命令，会在<code>/var/opt/gitlab/backups</code>目录下创建一个名称<code>1484626546_2017_01_17_gitlab_backup.tar</code>的压缩包，这就是Gitlab的完整备份文件，文件名开头的<code>1484626546</code>为精确到秒的时间戳。</p>
+<p>Gitlab的备份文件存放位置可以通过修改<code>/etc/gitlab/gitlab.rb</code>文件来配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gitlab_rails[&apos;backup_path&apos;] = &apos;/some/path/backups&apos;</div></pre></td></tr></table></figure></p>
+<h2 id="将Gitlab备份文件上传至云存储中"><a href="#将Gitlab备份文件上传至云存储中" class="headerlink" title="将Gitlab备份文件上传至云存储中"></a>将Gitlab备份文件上传至云存储中</h2><p>从Gitlab 7.4开始，可以使用备份脚本将其创建的’.tar’文件进行上传，其使用<a href="http://fog.io/" target="_blank" rel="external">Fog Library</a>来执行上传操作，在下面的例子中，我们使用Amazon S3作为存储，但是Fog也可以同时使用其他存储提供商的服务。</p>
+<p>在<code>/etc/gitlab/gitlab.rb</code>文件中添加以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">gitlab_rails[&apos;backup_upload_connection&apos;] = &#123;</div><div class="line">  &apos;provider&apos; =&gt; &apos;AWS&apos;,</div><div class="line">  &apos;region&apos; =&gt; &apos;eu-west-1&apos;,</div><div class="line">  &apos;aws_access_key_id&apos; =&gt; &apos;AKIAKIAKI&apos;,</div><div class="line">  &apos;aws_secret_access_key&apos; =&gt; &apos;secret123&apos;</div><div class="line">  # If using an IAM Profile, leave aws_access_key_id &amp; aws_secret_access_key empty</div><div class="line">  # ie. &apos;aws_access_key_id&apos; =&gt; &apos;&apos;,</div><div class="line">  # &apos;use_iam_profile&apos; =&gt; &apos;true&apos;</div><div class="line">&#125;</div><div class="line">gitlab_rails[&apos;backup_upload_remote_directory&apos;] = &apos;my.s3.bucket&apos;</div></pre></td></tr></table></figure></p>
+<h2 id="将备份文件上传至本地挂载的存储中"><a href="#将备份文件上传至本地挂载的存储中" class="headerlink" title="将备份文件上传至本地挂载的存储中"></a>将备份文件上传至本地挂载的存储中</h2><p>您也可以通过Fog将备份文件上传至本地挂在的存储设备中，例如NFS、CIFS、SMB等，由于Gitlab的备份服务是运行在Git用户下的，所以挂载点必须是以git用户作为owner。</p>
+<p>除了<code>local_root</code>之外，必须还要<code>backup_upload_remote_directory</code>参数，这个参数指明了备份文件将要复制到您所挂在的目录中的哪个子目录，如果目录不存在，将会自动创建，如果要将备份文件复制到您所挂在的那个根目录中，则该值只需要设置为<code>.</code>即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">gitlab_rails[&apos;backup_upload_connection&apos;] = &#123;</div><div class="line">  :provider =&gt; &apos;Local&apos;,</div><div class="line">  :local_root =&gt; &apos;/mnt/backups&apos;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># The directory inside the mounted folder to copy backups to</div><div class="line"># Use &apos;.&apos; to store them in the root directory</div><div class="line">gitlab_rails[&apos;backup_upload_remote_directory&apos;] = &apos;gitlab_backups&apos;</div></pre></td></tr></table></figure></p>
+<h2 id="保存配置文件"><a href="#保存配置文件" class="headerlink" title="保存配置文件"></a>保存配置文件</h2><p>需要注意的是，备份文件中并没有保存您的配置信息，一方面的原因是您的数据库中保存有加密的两步验证信息，讲加密信息和密钥保存在同一个位置违背了使用储存加密信息的原则。</p>
+<p>至少需要备份的文件是<code>/etc/gitlab/gitlab.rb</code>和<code>/etc/gitlab/gitlab-secrets.json</code>以保存数据库的加密密钥。</p>
+<h2 id="恢复以前创建的备份文件"><a href="#恢复以前创建的备份文件" class="headerlink" title="恢复以前创建的备份文件"></a>恢复以前创建的备份文件</h2><p>您只能将备份文件恢复到完全相同的Gitlab版本中。</p>
+<p>在执行恢复操作之前，您必须要拥有一个能够正常运行的Gitlab实例，同时在执行恢复操作的时候，该实例上原来运行的所有数据都将会被清空，被恢复的数据所替代。</p>
+<p>在启用了两步验证(2FA)的Gitlab中，您必须要确保将<code>/etc/gitlab/gitlab.rg</code>和<code>/etc/gitlab/gitlab-secrets.json</code>同时恢复，并且在恢复之后要运行<code>sudo gitlab-ctl reconfigure</code>使修改生效。</p>
+<p>执行以下恢复步骤的过程中我们假设：</p>
+<ul>
+<li>必须安装了与创建备份所用Gitlab完全相同的版本。</li>
+<li>必须执行了<code>sudo gitlab-ctl reconfigure</code>至少一次。</li>
+<li>如果Gitlab没有在运行中，则必须要执行<code>sudo gitlab-ctl start</code>。</li>
+</ul>
+<p>首先，确保备份的tar文件被放置在了<code>gitlab.rb</code>文件中<code>gitlab_rails[&#39;backup_path&#39;]</code>中所配置的路径下，默认值是<code>/var/opt/gitlab/backups</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo cp 1484626546_2017_01_17_gitlab_backup.tar /var/opt/gitlab/backups/</div></pre></td></tr></table></figure></p>
+<p>停止连接到数据库的进程，只剩Gitlab在运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo gitlab-ctl stop unicorn</div><div class="line">sudo gitlab-ctl stop sidekiq</div><div class="line"># Verify</div><div class="line">sudo gitlab-ctl status</div></pre></td></tr></table></figure></p>
+<p>接下来，恢复备份文件，指定您想要恢复的文件的时间戳<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># This command will overwrite the contents of your GitLab database!</div><div class="line">sudo gitlab-rake gitlab:backup:restore BACKUP=1484626546_2017_01_17</div></pre></td></tr></table></figure></p>
+<p>重启并确认Gitlab运行状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo gitlab-ctl start</div><div class="line">sudo gitlab-rake gitlab:check SANITIZE=true</div></pre></td></tr></table></figure></p>
+<p>如果备份和恢复所用的Gitlab版本不符，在恢复过程中会报错，您只需要重新安装正确的Gitlab版本并重试即可。</p>
+<h2 id="设置定时任务保证每日备份"><a href="#设置定时任务保证每日备份" class="headerlink" title="设置定时任务保证每日备份"></a>设置定时任务保证每日备份</h2><p>为了添加每日定时备份任务，需要使用root用户添加cron定时任务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo su -</div><div class="line">crontab -e</div></pre></td></tr></table></figure></p>
+<p>然后添加如下命令使其每日凌晨两点钟执行一次定时备份：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">0 2 * * * /opt/gitlab/bin/gitlab-rake gitlab:backup:create CRON=1</div></pre></td></tr></table></figure></p>
+<p>同时，为了避免备份文件过多占用磁盘空间，我们需要为备份文件设置一个生命周期，只需要在<code>/etc/gitlab/gitlab/rb</code>中设置以下参数并执行<code>sudo gitlab-ctl reconfigure</code>即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># limit backup lifetime to 7 days - 604800 seconds</div><div class="line">gitlab_rails[&apos;backup_keep_time&apos;] = 604800</div></pre></td></tr></table></figure></p>
+<p>注意：<code>backup_keep_time</code>仅对本地备份有效。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://menglei.tk/2017/01/17/gitlab/" data-id="ciy3vf1rk000nfn1n08ew5m9r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GIT/">GIT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/备忘/">备忘</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/持续集成/">持续集成</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-nginx-websocket" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/02/nginx-websocket/" class="article-date">
+  <time datetime="2017-01-02T13:29:36.000Z" itemprop="datePublished">2017-01-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/server/">server</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/02/nginx-websocket/">WebSocket的实现以及通过Nginx进行反向代理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="什么是Websocket"><a href="#什么是Websocket" class="headerlink" title="什么是Websocket"></a>什么是Websocket</h1><p><code>Websocket</code> 是HTML5开始推出的一种新的协议，实现了浏览器与服务端的全双工通信，在使用WebSocket时，，只要和服务端做一个握手(handshaking)动作，浏览器首先要向服务端发起一个特殊的HTTP请求，其头部附加了信息<code>Upgrade: WebSocket</code>，表明这是一个申请协议升级的HTTP请求，服务端解析出来这些信息后，产生一个应答给客户端，这样双方的WebSocket连接就建立起来了，即可形成一条全双工的数据通道，两者之间可以进行互相通信，直到客户端和服务端中的某一方主动关闭连接。</p>
+<p>在<code>WebSocket</code>出现之前，为了解决浏览器和服务端之间的实时推送问题，采取了很多解决方案，通常使用的是轮询(Polling)和Comet技术，这些方案带来很明显的缺陷就是需要由浏览器主动发出HTTP Request，大量消耗服务器的带宽和资源，所以为了解决这些问题，HTML5推出了WebSocket。</p>
+<p><code>Socket.io</code> 是WebSocket协议的一个拓展，由于浏览器端对WebSocket的支持程度不一，为了能够兼容不同的浏览器，提升用户体验，简化程序员编写代码时的复杂度，<code>Socket.io</code>封装了以上几种不同的实时通讯机制，并实现了统一的接口，在实际应用的过程中，如果浏览器支持WebSocket，就会以WebSocket方式与服务端进行实时数据交互，如果浏览器端不支持WebSocket特性，那么<code>Socket.io</code>会主动进行降级，使用轮询等其他方式。以下为<code>Socket.io</code>兼容的几种不同机制：</p>
+<ul>
+<li><strong>Adobe® Flash® Socket</strong>：通过将Flash插件嵌入到浏览器中而实现的一种Socket通信模式，由于是第三方实现，不在W3C规范内，并且绝大部分手机端浏览器不支持这种方式，所以在逐渐淘汰中。</li>
+<li><strong>AJAX Long Polling</strong>： 所有浏览器都支持，定时向服务器端发送HTTP请求，兼容性广，但是会给服务器带来很大压力，并且不能保证数据的及时更新。</li>
+<li><strong>AJAX multipart streaming</strong>： 在XMLHttpRequest对象上，使用某些浏览器(比如FireFox)支持的multi-part标志，Ajax请求发送给服务端并保持挂起状态，每次需要向客户端发送信息的时候，就寻找一个挂起的HTTP请求进行响应，并且所有的响应请求都会通过统一的连接来写入。</li>
+<li><strong>Forever Iframe</strong>： 该技术设计了一个置于页面中的隐藏Iframe标签，该标签的src属性指向返回服务器端事件的servlet路径，每次在事件到达时，servlet写入并刷新一个新的script标签，该标签内部带有Javascript代码，iframe的内容被附加上这一script标签，标签中的内容就会得到执行，这种方式的缺点是连接和数据都是有浏览器通过HTML标签处理的，你无法知道连接何时在哪一端已经被断开了，并且Iframe标签在浏览器中将逐步被取消。</li>
+<li><strong>JSONP Polling</strong>： JSONP轮询基本上与HTTP轮询一样，不同之处是JSONP可以发出跨域请求。</li>
+</ul>
+<h1 id="WebSocket-简单demo-Socket-io实现"><a href="#WebSocket-简单demo-Socket-io实现" class="headerlink" title="WebSocket 简单demo(Socket.io实现)"></a>WebSocket 简单demo(Socket.io实现)</h1><p>简单客户端：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;title&gt;WebSocket Demo&lt;/title&gt;</div><div class="line">    &lt;script src=&quot;//cdn.bootcss.com/socket.io/1.7.2/socket.io.min.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">    &lt;h1&gt;WebSocket Demo&lt;/h1&gt;</div><div class="line"></div><div class="line">    &lt;script&gt;</div><div class="line">        var io = io.connect(&apos;http://127.0.0.1:3000&apos;);</div><div class="line">        io.on(&apos;data&apos;, function (data) &#123;</div><div class="line">            console.log(&apos;on server data: &apos; + data);</div><div class="line">        &#125;);</div><div class="line">    &lt;/script&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<p>简单服务端：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var app = require(&apos;koa&apos;)();</div><div class="line">var server = require(&apos;http&apos;).createServer(app.callback());</div><div class="line">var io = require(&apos;socket.io&apos;)(server);</div><div class="line">io.on(&apos;connection&apos;, function (client) &#123;</div><div class="line">    client.emit(&apos;data&apos;, &apos;Hello WebSocket.&apos;);</div><div class="line">&#125;);</div><div class="line">server.listen(3000);    //监听3000端口</div></pre></td></tr></table></figure></p>
+<p>我们打开控制台，访问html页面，即可在控制台看到输出的<code>Hello WebSocket</code>字样，即表明服务端已经具备向客户端推送数据的能力。</p>
+<h1 id="Nginx反向代理WebSocket"><a href="#Nginx反向代理WebSocket" class="headerlink" title="Nginx反向代理WebSocket"></a>Nginx反向代理WebSocket</h1><p>反向代理(Reverse Proxy)是指代理服务器接受互联网上的请求，将请求转发给内部服务器并将结果返回给外部客户端，使用反向代理服务器，有以下几点好处：</p>
+<ul>
+<li>可以保护网站安全，所有的访问请求都是先经过代理服务器，然后才到达真正的服务器，如果有网络攻击，可以直接在代理服务器上进行屏蔽，不影响后端真正服务器的运行。</li>
+<li>可以将后端服务器上的资源进行缓存，实现某些静态资源的加速访问，减轻后端服务器的负载压力。</li>
+<li>充当负载均衡服务器，将访问请求平均地分发给后端服务器，同时自动剥离故障服务器，保证服务平稳运行。</li>
+</ul>
+<p><code>Nginx</code>是一款优秀的轻量级网页服务器，同时也支持反向代理服务器功能，在这里，我们将使用Nginx作为HTTP和WebSocket的反向代理服务器，只要在Nginx的配置文件中添加以下项目即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen       80;</div><div class="line">    server_name  localhost;</div><div class="line">    #access_log  logs/host.access.log  main;</div><div class="line">    location / &#123;</div><div class="line">        proxy_pass http://127.0.0.1:3000/;</div><div class="line">        proxy_set_header Host $http_host;</div><div class="line">        proxy_http_version 1.1;</div><div class="line">        proxy_set_header Upgrade $http_upgrade;</div><div class="line">        proxy_set_header Connection &quot;upgrade&quot;;</div><div class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">        proxy_set_header X-Read-IP $remote_addr;</div><div class="line">    &#125;</div><div class="line">    #error_page  404              /404.html;</div><div class="line">    error_page   500 502 503 504  /50x.html;</div><div class="line">    location = /50x.html &#123;</div><div class="line">        root   html;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>至此，我们只要通过80端口即可访问我们的WebSocket demo了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://menglei.tk/2017/01/02/nginx-websocket/" data-id="ciy3vf1rf000gfn1n62nfzw0g" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTPS/">HTTPS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx/">Nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebSocket/">WebSocket</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-gitlab-pages" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/12/gitlab-pages/" class="article-date">
+  <time datetime="2016-12-12T10:50:36.000Z" itemprop="datePublished">2016-12-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/memo/">memo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/12/gitlab-pages/">使用Gitlab Pages建立个人博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="关于Gitlab-Pages"><a href="#关于Gitlab-Pages" class="headerlink" title="关于Gitlab Pages"></a>关于Gitlab Pages</h1><p>与Github Pages相似，Gitlab Pages也是一个用来托管静态文件的服务，由Gitlab提供，通过与Gitlab CI和Gitlab Runner集成，将用户个人、组织以及项目的页面部署到静态文件服务当中。</p>
+<p>Gitlab Pages是从Gitlab EE 8.3版本才引入的，自定义CNAME和TLS支持是从Gitlab EE 8.5版本中引入的，由于我们没有Gitlab EE 环境，此处我们使用Gitlab.com提供免费服务。</p>
+<h1 id="开始使用Gitlab-Pages"><a href="#开始使用Gitlab-Pages" class="headerlink" title="开始使用Gitlab Pages"></a>开始使用Gitlab Pages</h1><p> 通常来说，有两种类型的pages</p>
+<ul>
+<li>用户页面(<code>username.exmaple.io</code>)或者组织页面(<code>groupname.exmaple.io</code>)</li>
+<li>项目页面(<code>username.exmaple.io/projectname</code>)或者(<code>groupname.exmaple.io/projectname</code>)</li>
+</ul>
+<p>在一个Gitlab实例中，用户名或者组织名是唯一的，所以我们可以将其当作命名空间使用，下面表格展示了不同类型的Gitlab Pages与他们的项目名称的关系以及最终URL的展现形式：</p>
+<table>
+<thead>
+<tr>
+<th>Gitlab Pages类型</th>
+<th>Gitlab中的项目名称</th>
+<th>网站URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用户页面</td>
+<td><code>username.exmaple.io</code></td>
+<td><code>http(s)://username.exmaple.io</code></td>
+</tr>
+<tr>
+<td>组织页面</td>
+<td><code>groupname.exmaple.io</code></td>
+<td><code>http(s)://groupname.exmaple.io</code></td>
+</tr>
+<tr>
+<td>用户项目页面</td>
+<td><code>projectname</code></td>
+<td><code>http(s)://username.exmaple.io/projectname</code></td>
+</tr>
+<tr>
+<td>组织项目页面</td>
+<td><code>projectname</code></td>
+<td><code>http(s)://groupname.exmaple.io/projectname</code></td>
+</tr>
+</tbody>
+</table>
+<h1 id="使用Gitlab-Pages的基本流程"><a href="#使用Gitlab-Pages的基本流程" class="headerlink" title="使用Gitlab Pages的基本流程"></a>使用Gitlab Pages的基本流程</h1><p>简单的说，使用Gitlab Pages 需要以下几步：</p>
+<ul>
+<li>从管理员处得到Gitlab Pages的域名(gitlab.com的对应域名为gitlab.io)，这一步非常重要，所以您必须确保首先获得正确的域名。</li>
+<li>创建一个项目。</li>
+<li>向该工程根目录中推送一个<code>.gitlab-ci.yml</code>文件。</li>
+<li>建立一个Gitlab Runner用来构建您的服务。</li>
+</ul>
+<h1 id="搭建个人博客"><a href="#搭建个人博客" class="headerlink" title="搭建个人博客"></a>搭建个人博客</h1><p>下面要在Gitlab.com上搭建免费的个人博客，由于我的用户名是mlei，所以建立一个工程，名为mlei.gitlab.io。并将此工程克隆至本地。</p>
+<p>将github pages工程的hexo分支内源码复制到该工程目录下，然后新建一个.gitlab-ci.yml文件，其内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">image: node:4.2.2</div><div class="line"></div><div class="line">pages:</div><div class="line">  cache:</div><div class="line">    paths:</div><div class="line">    - node_modules/</div><div class="line"></div><div class="line">  script:</div><div class="line">  - npm install hexo-cli -g</div><div class="line">  - npm install</div><div class="line">  - hexo generate</div><div class="line">  artifacts:</div><div class="line">    paths:</div><div class="line">    - public</div><div class="line">  only:</div><div class="line">  - master</div></pre></td></tr></table></figure>
+<p>提交所有更改，然后将代码库push到远程，Gitlab会自动识别.gitlab-ci.yml中的配置并执行其中的操作，执行完毕后，访问<code>http://mlei.gitlab.io</code>即可访问我的博客。</p>
+<h1 id="同步Github-Pages内容"><a href="#同步Github-Pages内容" class="headerlink" title="同步Github Pages内容"></a>同步Github Pages内容</h1><p>每次提交Github Pages之后都要将博客源代码文件复制到Gitlab Pages的工程下面，然后再提交，显然这种重复的体力劳动是不需要人力去完成的，我们可以在travis CI中设置相应的操作，让其自动将代码提交至Gitlab版本库中，但是Gitlab提供了一个更加简便快捷的方法：镜像版本库(Mirror repository)。</p>
+<p>点击工程的设置按钮，找到<code>Mirror  Repository</code>菜单栏，点击进入，一共提供了两种选择，一共是将该版本库当作其他项目的镜像，每小时同步一次内容，另一种是将该版本库当作主版本库，每次提交之后，将其内容同步至其他版本库，我们此处用的是前者。</p>
+<p>只要将Mirror repository的复选框勾选，然后填入我的Github pages的地址，确认即可，此时，自动同步功能已经开启。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://menglei.tk/2016/12/12/gitlab-pages/" data-id="ciy3vf1rb000cfn1nez9kkg1j" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GIT/">GIT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitLab/">GitLab</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/备忘/">备忘</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-travis" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/05/travis/" class="article-date">
+  <time datetime="2016-12-05T08:45:09.000Z" itemprop="datePublished">2016-12-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/memo/">memo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/05/travis/">Use Hexo With Travis Ci</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Travis-CI-简介"><a href="#Travis-CI-简介" class="headerlink" title="Travis CI 简介"></a>Travis CI 简介</h1><p>Travis CI是一个分步式的开源持续构建项目，只需要通过配置.travis.yml文件，即可将Github上的项目进行持续的编译、测试等工作，以便尽早发现错误，尽早改正，并减少人工的重复劳动。同时，也可以通过travis ci完成很多有趣的工作。</p>
+<h1 id="通过Travis-CI自动发布hexo博客"><a href="#通过Travis-CI自动发布hexo博客" class="headerlink" title="通过Travis CI自动发布hexo博客"></a>通过Travis CI自动发布hexo博客</h1><p>我们建立的hexo博客，每次写完一篇，都要执行 <code>hexo generate</code> 和 <code>hexo deploy</code> 等命令，将博客生成的HTML静态文件部署到Github的版本库上，同时，也会将源代码保存一份到Github的另一个分支，每次都要执行很多重复操作，在此，我们可以通过Travis CI来帮我们完成这些重复劳动。</p>
+<h2 id="为项目启用Travis-CI功能"><a href="#为项目启用Travis-CI功能" class="headerlink" title="为项目启用Travis CI功能"></a>为项目启用Travis CI功能</h2><p>首先打开<code>https://travis-ci.org</code>并选择使用Github授权登陆，登陆成功之后，进入<code>https://travis-ci.org/profile/</code>，可以看到用户Github账户下的所有公开的版本库，如果没有显示，就点击右上角“Sync account”按钮，将项目列表同步过来，我们选择github page所在的版本库(本人的为：leim/leim.github.io)，点击左侧的toggle button即可启用。</p>
+<p>此时我们再回到Github的<code>leim/leim.github.io</code>版本库下，点击<code>Settings-&gt;Integrations &amp; services</code>，即可看到Travis CI已经在列表中了，表明Travis CI功能已经成功启用。</p>
+<h2 id="Github-Personal-Access-Token"><a href="#Github-Personal-Access-Token" class="headerlink" title="Github Personal Access Token"></a>Github Personal Access Token</h2><p>在Github点击右上角头像，然后点击<code>Settings</code>，进入个人设置，点击<code>Personal access token</code>，然后点击<code>Generate new token</code>，我们需要生成一个具有push权限的access token，所以选择讲repo下的public_repo前面打勾，同时将此token备注为public_repo_deploy，表明其作用，确认之后牢记此token，因为它只会显示这一次，一旦忘记只能进行重置，无法找回。</p>
+<h2 id="配置Travis-CI"><a href="#配置Travis-CI" class="headerlink" title="配置Travis CI"></a>配置Travis CI</h2><p> 再次回到Travis CI，可以看到列表中的<code>leim\leim.github.io</code>已经在那里了，我们点击右侧<code>More options -&gt; Settings</code>，可以看到设置页面，有一些配置选项：</p>
+<ul>
+<li>Build only if .travis.yml is present：表示只有在<code>.travis.yml</code>文件存在的分支发生变更才开始运行构建。</li>
+<li>Build pushes：表示push事件可以触发构建。</li>
+<li>Limit concurrent jobs：限制同时运行的构建数。</li>
+<li>Build pull request：表示pull事件可以触发构建。</li>
+<li>Environment Variables：配置所需的环境变量，主要是一些保密信息。</li>
+<li>Cron Jobs：除了按照特定事件触发构建外，也可以根据设置定时触发构建任务。</li>
+</ul>
+<p>我们讲上一步得到的 personal access token复制到 Environment Variables中，并命名为<code>deploy_github_public_repo</code>然后保存。</p>
+<p>至此所有的设置工作全部完成。</p>
+<h1 id="编写-travis-yml文件"><a href="#编写-travis-yml文件" class="headerlink" title="编写.travis.yml文件"></a>编写.travis.yml文件</h1><p>.travis.yml文件是Travis CI的所有动作的描述文件，当然我们也要将所需要做的工作写在该文件中。其主要内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">language: node_js   //构建环境</div><div class="line">node_js: stable     //版本</div><div class="line"> </div><div class="line">install:   //安装依赖</div><div class="line">  - npm install hexo -g</div><div class="line">  - npm install</div><div class="line"> </div><div class="line"> </div><div class="line">script:   //执行脚本</div><div class="line">  - hexo g</div><div class="line"> </div><div class="line">after_script:   //脚本执行成功之后，部署代码</div><div class="line">  - cd ./public</div><div class="line">  - git init</div><div class="line">  - git config user.name &quot;leim&quot;</div><div class="line">  - git config user.email &quot;z@menglei.tk&quot;</div><div class="line">  - git add .</div><div class="line">  - git commit -m &quot;auto update docs by travis ci&quot;</div><div class="line">  //$&#123;deploy_github_public_repo&#125;为设置在环境变量中的access token，此处通过https提交更改到master分支</div><div class="line">  - git push --force --quiet &quot;https://$&#123;deploy_github_public_repo&#125;@github.com/leim/leim.github.io.git&quot; master:master</div><div class="line"> </div><div class="line">branches:</div><div class="line">  only:</div><div class="line">    - hexo   //仅hexo分支触发该构建</div></pre></td></tr></table></figure>
+<p>到这一步，所有的工作就全部完成了，接下来，我们可以新建一篇文章，然后将整个博客的代码部分commit 并 push 到hexo分支，即可自动触发travis CI的持续构建服务，自动生成HTML静态文件并提交到master分支，此时博客网站即自动更新完毕。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://menglei.tk/2016/12/05/travis/" data-id="ciy3vf1r6000afn1n0x9a01gr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GIT/">GIT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/备忘/">备忘</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/持续集成/">持续集成</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mkdocs" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/07/mkdocs/" class="article-date">
+  <time datetime="2016-11-07T11:29:19.000Z" itemprop="datePublished">2016-11-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/memo/">memo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/07/mkdocs/">MkDocs备忘</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MkDocs"><a href="#MkDocs" class="headerlink" title="MkDocs"></a>MkDocs</h1><p>MkDocs（<a href="http://www.mkdocs.org/" target="_blank" rel="external">官网</a>、<a href="https://github.com/mkdocs/mkdocs/" target="_blank" rel="external">Github</a>）是一款使用python开发的轻量级静态站点生成器，主要用于生成api文档，使用markdown撰写，使用yaml作为配置文件。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>首先需要安装python以及pip，然后使用pip即可安装MkDocs。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install python</div><div class="line">sudo apt-get install python-pip</div><div class="line">sudo pip install mkdocs</div></pre></td></tr></table></figure>
+<p>安装完成之后，可以执行命令<code>mkdocs --version</code>查看所安装版本。</p>
+<h1 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h1><p>执行以下命令新建一个工程。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdocs new demo</div><div class="line">cd demo</div></pre></td></tr></table></figure>
+<p>生成的目录里结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── mkdocs.yml</div><div class="line">└── docs</div><div class="line">    └── index.md</div></pre></td></tr></table></figure>
+<p>其中包含了 <code>mkdocs.yml</code>  工程配置文件以及源文件目录：docs，在源文件目录docs下有一个文件index.html，是一个默认的首页文件。</p>
+<p>控制台进入到与 <code>mkdocs.yml</code> 和 <code>docs</code> 同一级的目录中，运行 <code>mkdocs serve</code>，启动内置的http服务器，在浏览器中打开 <code>http://127.0.0.1:4000</code> ，就会看到<code>docs/index.md</code>渲染之后的页面。内置的http服务器会在我们修改工程内的任意文件的时候检测变化，自动刷新并载入修改后的文件。</p>
+<h1 id="详细配置"><a href="#详细配置" class="headerlink" title="详细配置"></a>详细配置</h1><p>所有的配置可以在 <code>mkdocs.yml</code> 文件中编辑，默认 <code>mkdocs.yml</code> 中只有一个字段 <code>site_name</code> 是必填的，其余字段均为选填。各个字段的详细说明如下：</p>
+<h2 id="site-name"><a href="#site-name" class="headerlink" title="site_name"></a>site_name</h2><p>文档的主标题，配置文件 <code>mkdocs.yml</code> 中唯一的必填字段。</p>
+<h2 id="site-url"><a href="#site-url" class="headerlink" title="site_url"></a>site_url</h2><p>站点的URL，渲染后的HTML头部会带有包含该URL的link标签。默认null。</p>
+<h2 id="repo-url"><a href="#repo-url" class="headerlink" title="repo_url"></a>repo_url</h2><p>版本库的URL，如果设置该项，每页都会添加一个版本库的URL链接。默认null。</p>
+<h2 id="repo-name"><a href="#repo-name" class="headerlink" title="repo_name"></a>repo_name</h2><p>版本库的名字，如果设置的话，会在每个页面显示一个指向github或者bitbucket的链接。如果repo_url符合对应规则，会默认显示 <code>Github</code> 或者 <code>Bitbucket</code>，否则会是null。</p>
+<h2 id="edit-url"><a href="#edit-url" class="headerlink" title="edit_url"></a>edit_url</h2><p>编辑链接，如果设置，会在每个页面显示一个链接，点击链接会直接指向修改页面的地址。默认null。</p>
+<h2 id="site-description"><a href="#site-description" class="headerlink" title="site_description"></a>site_description</h2><p>站点的描述，如果设置该项，渲染后的HTML头部会带有包含该描述的meta标签。</p>
+<h2 id="site-author"><a href="#site-author" class="headerlink" title="site_author"></a>site_author</h2><p>站点的作者，如果设置该项，选然后的HTML头部会带有包含该项的meta标签。</p>
+<h2 id="site-favicon"><a href="#site-favicon" class="headerlink" title="site_favicon"></a>site_favicon</h2><p>站点的favicon相对docs目录的路径。</p>
+<h2 id="copyright"><a href="#copyright" class="headerlink" title="copyright"></a>copyright</h2><p>站点的版权信息。</p>
+<h2 id="docs-dir"><a href="#docs-dir" class="headerlink" title="docs_dir"></a>docs_dir</h2><p>源文件所在目录相对 <code>mkdocs.yml</code> 的路径，默认 <code>docs</code>。</p>
+<h2 id="site-dir"><a href="#site-dir" class="headerlink" title="site_dir"></a>site_dir</h2><p>生成的HTML文件相对 <code>mkdocs.yml</code> 的路径，默认 <code>site</code>。</p>
+<h2 id="theme"><a href="#theme" class="headerlink" title="theme"></a>theme</h2><p>站点生成HTML所用的主题，内置主题有mkdocs、readthedocs，默认mkdocs。</p>
+<h2 id="pages"><a href="#pages" class="headerlink" title="pages"></a>pages</h2><p>站点的目录结构。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">pages:</div><div class="line">    - &apos;Introduction&apos;: &apos;index.md&apos;</div><div class="line">    - &apos;User Guide&apos;: &apos;user-guide.md&apos;</div><div class="line">    - &apos;About&apos;: &apos;about.md&apos;</div></pre></td></tr></table></figure>
+<h2 id="use-directory-urls"><a href="#use-directory-urls" class="headerlink" title="use_directory_urls"></a>use_directory_urls</h2><p>站点的链接类型。</p>
+<table>
+<thead>
+<tr>
+<th>Source file</th>
+<th>Generated HTML</th>
+<th>use_directory_urls=true</th>
+<th>use_directory_urls=false</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>index.md</td>
+<td>index.html</td>
+<td>/</td>
+<td>/index.html</td>
+</tr>
+<tr>
+<td>api-guide.md</td>
+<td>api-guide/index.html</td>
+<td>/api-guide/</td>
+<td>/api-guide/index.html</td>
+</tr>
+<tr>
+<td>about.md</td>
+<td>about/index.html</td>
+<td>/about/</td>
+<td>/about/index.html</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://menglei.tk/2016/11/07/mkdocs/" data-id="ciy3vf1r40007fn1nq4octi2f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/API/">API</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/备忘/">备忘</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-youknow" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/29/youknow/" class="article-date">
+  <time datetime="2016-10-29T17:11:51.000Z" itemprop="datePublished">2016-10-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/memo/">memo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/29/youknow/">关于代理服务器的一些备忘</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Node-js代理服务器"><a href="#Node-js代理服务器" class="headerlink" title="Node.js代理服务器"></a>Node.js代理服务器</h1><p>出于信息安全的需求，很多公司对于员工电脑访问外网都会有很多特别的限制，比如某国内大型上市IT解决方案供应商，所有的员工电脑必须通过某个指定的HTTP代理服务器访问互联网资源，并且还要进行用户名密码的验证，导致很多无法设置代理服务器的软件以及仅支持socks5代理的软件都无法使用，甚至想要在调试应用的时候调用一些第三方api都需要做很多特殊设置。</p>
+<p>比如正常的Node.js在做HTTP请求的时候，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">var http = require(&apos;http&apos;);</div><div class="line">var opt = &#123;</div><div class="line">    host: &apos;api.example.com&apos;,   //要访问的服务器地址或者域名</div><div class="line">    port: 8080,  //要访问的服务器端口</div><div class="line">    method: &apos;POST&apos;,   //方法</div><div class="line">    path: &apos;/api&apos;,     //路径</div><div class="line">    headers: &#123;   //请求headers</div><div class="line">        //request headers</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var req = http.request(opt, function(res)&#123;</div><div class="line">    var body = &apos;&apos;;</div><div class="line">    res.on(&apos;data&apos;, function(buf)&#123;</div><div class="line">        body += buf;</div><div class="line">    &#125;).on(&apos;end&apos;, function()&#123;</div><div class="line">        console.log(body);  //print response</div><div class="line">    &#125;);</div><div class="line">&#125;).on(&apos;error&apos;, function(err)&#123;</div><div class="line">    console.log(&apos;err: &apos; + err.message);</div><div class="line">&#125;);</div><div class="line">req.end(&apos;request payload&apos;);</div></pre></td></tr></table></figure></p>
+<p>如果请求需要经过代理进行访问的时候，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var http = require(&apos;http&apos;);</div><div class="line">var username = &apos;&apos;;  //proxy username</div><div class="line">var password = &apos;&apos;;  //proxy user password</div><div class="line">var opt = &#123;</div><div class="line">    host: &apos;127.0.0.1&apos;,   //代理服务器地址</div><div class="line">    port: 8080,     //代理服务器端口</div><div class="line">    method: &apos;POST&apos;,</div><div class="line">    path: &apos;http://api.exmaple.com:8080/api&apos;,   //真实请求URL</div><div class="line">    headers: &#123;</div><div class="line">        &apos;Proxy-Authentication&apos;: &apos;Base &apos; + new Buffer(username + &apos;:&apos; + password).toString(&apos;base64&apos;), //如果代理服务器需要用户名密码，就加上这一行</div><div class="line">        //其他的请求header</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">//其余部分和之前相同，没有变化</div></pre></td></tr></table></figure>
+<h1 id="NPM代理服务器"><a href="#NPM代理服务器" class="headerlink" title="NPM代理服务器"></a>NPM代理服务器</h1><p>由于众所周知的原因，国内的网络，你懂的，有时候访问npm的时候就会抽风，造成一些意想不到的麻烦，不过还好，国内的淘宝团队建立了一个npm的镜像，地址是 <code>https://npm.taobao.org/</code>，国内的开发者可以访问这里地址，速度非常快，同时可以使用以下命令，将npm的安装源替换为淘宝提供的源，加速模块的安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm config set registry = &apos;https://registry.npm.taobao.org&apos;</div></pre></td></tr></table></figure>
+<p>如果只是想在安装某一个模块的时候临时需要使用淘宝的源，可以按照以下操作，单次安装有效：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install koa@next --registry=https://registry.npm.taobao.org</div></pre></td></tr></table></figure>
+<p>同样，对于像某大型上市IT解决方案供应商的网络那样，只有经过代理才能访问外网的情况，则需要按照以下方法来设置代理服务器，这样执行之后，所有执行npm安装模块的时候，都会通过该代理服务器访问外网进行下载，只需要执行 <code>npm config get proxy</code> 即可查看设置的代理服务器是否正确：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm config set proxy = &apos;http://username:password@proxy.example.com:8080&apos;</div></pre></td></tr></table></figure>
+<h1 id="CCproxy-与-Proxifier-代理"><a href="#CCproxy-与-Proxifier-代理" class="headerlink" title="CCproxy 与 Proxifier 代理"></a>CCproxy 与 Proxifier 代理</h1><p>由于某些特殊的应用程序可能并不支持代理服务器的设置，或者设置的代理服务器不支持输入用户名密码，或者仅支持socks5代理，对于这些特殊情况，可以考虑使用ccproxy或者proxifier解决。</p>
+<p>CCproxy是一款国人开发的代理服务器软件，免费版支持三用户同时在线使用，对于一般个人用户来说完全足够，该软件支持二级代理功能，可以在软件内设置上级代理的地址与用户名密码，同时转为本机的一个无用户名密码的代理，此时，本机上的无法设置代理用户名密码的软件就可以使用ccproxy进行代理上网了。</p>
+<p>Proxifier是国外开发的一款全局代理软件，在该软件中设置好上级代理的信息，运行之后，会抓取本机的所有访问流量，同时将流量直接转发至代理服务器，无论软件是否设置代理与否，这样就保证了很多无法设置代理服务器的软件也可以访问外网。同时，启用proxifier之后，上面的Node.js和NPM在访问外网的时候就无需再进行其余设置了，proxifier会直接抓取其访问流量并转发至代理服务器。同时该软件还可以进行代理规则的配置，可以设置指定名称的软件访问网络不经过代理，或者设置多个代理，对于不同的目标，走不同的代理服务器，功能非常强大。</p>
+<h1 id="关于Shadowsocks"><a href="#关于Shadowsocks" class="headerlink" title="关于Shadowsocks"></a>关于Shadowsocks</h1><p>略。。。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://menglei.tk/2016/10/29/youknow/" data-id="ciy3vf1qy0006fn1nai2nj3rl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/proxy/">proxy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/备忘/">备忘</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/24/hexo/" class="article-date">
+  <time datetime="2016-10-24T15:04:44.000Z" itemprop="datePublished">2016-10-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/memo/">memo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/24/hexo/">Hexo搭建备忘</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="关于Hexo"><a href="#关于Hexo" class="headerlink" title="关于Hexo"></a>关于Hexo</h1><p>Hexo是一款轻量级的HTML静态博客生成器，由Node.js编写，支持Markdown撰写，运行速度快，可以一键部署到Github Pages等托管网站，同时支持插件，可以通过编写插件支持更加丰富的功能。</p>
+<h1 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h1><p>Hexo基于Node.js编写，安装Hexo之前，需要首先确保正确安装了Node.js、npm和Git（参见<a href="https://nodejs.org/" target="_blank" rel="external">Node.js官网</a>、<a href="https://git-scm.com/" target="_blank" rel="external">Git官网</a>），只要运行以下命令即可将Hexo安装到电脑中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-cli -g</div></pre></td></tr></table></figure>
+<h1 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h1><p>安装Hexo成功后，即可创建Hexo工程目录，执行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo init demo</div><div class="line">cd demo</div><div class="line">npm install</div></pre></td></tr></table></figure>
+<p>创建成功后，所包含的目录结构以及功能说明如下：</p>
+<ul>
+<li>_config.yml：网站配置信息。</li>
+<li>packages.json：node_modules模块配置信息。</li>
+<li>scaffolds：模板配置文件夹。</li>
+<li>sources：用户资源，markdown和html会被render并保存至public文件夹供访问，其余文件被直接copy。其中_post文件夹中保存已发布的文章，_draft文件夹中保存草稿。</li>
+<li>themes：主题文件夹。</li>
+</ul>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>网站的所有配置信息保存在_config.yml文件中，可以视情况进行修改。</p>
+<p>具体的配置说明可参见：<a href="https://hexo.io/zh-cn/docs/configuration.html。" target="_blank" rel="external">https://hexo.io/zh-cn/docs/configuration.html。</a></p>
+<h1 id="申请Github-Pages空间"><a href="#申请Github-Pages空间" class="headerlink" title="申请Github Pages空间"></a>申请Github Pages空间</h1><p>在github上面创建一个和repository，名称为 <your user="" name="">.github.io，进入settings，选择options，下面有Github Pages的设置区域，可以选择默认的分支，并且能够自定义域名，这里我们将默认分支设置为master，同时添加自定义域名 <code>menglei.tk</code> ，添加自定义域名之后，下方 enforce https选项变得不可选，因为github无法对自定义域名提供https证书，此处我们可以通过其他方式来对https进行支持。这里填写完自定义域名之后，需要到域名的控制台，为其添加A记录，分别对应IP地址为 192.30.252.153 和 192.30.252.154 。</your></p>
+<p>这样，所有访问自定义域名都会直接请求到该repo的master分支内根目录下的index.html文件。</p>
+<h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>Hexo可以支持git、heroku、Rsync、OpenShift、FTPSync等多种部署方式，如果这里没有提供您所需要的部署方式，可以直接将生成的public文件夹中所有的文件复制到所需要的server root文件夹。</p>
+<p>我们这里采用的是git部署方式，首先需要添加 <code>hexo-deployer-git</code> ，执行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+<p>然后在根目录下的_config.yml文件后面，增加以下配置信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">- type: git</div><div class="line">  repo: &lt;repo url&gt;   //远程repo地址</div><div class="line">  branch: &lt;branch name&gt;  //通过git提交到远程repo的分支</div><div class="line">  message: &lt;push message&gt;  //提交信息</div><div class="line">- type: git</div><div class="line">  repo: &lt;repo url2&gt;  // 可以支持同时部署到多个远程repo</div></pre></td></tr></table></figure>
+<p>这里可以同时支持将其部署到多个repo中，也可以同时支持多种不同的repo类型。</p>
+<h1 id="Sitemap："><a href="#Sitemap：" class="headerlink" title="Sitemap："></a>Sitemap：</h1><p>为了让搜索引擎更好的抓取网站内容，我们这里可以生成sitemap，首先需要执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install hexo-generator-baidu-sitemap --save   //生成百度sitemap</div><div class="line">npm install hexo-generator-sitemap --save    //生成google sitemap</div></pre></td></tr></table></figure>
+<p>然后在根目录_config.yml文件末尾，添加以下配置信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sitemap:</div><div class="line">  path: sitemap.xml</div><div class="line">baidusitemap:</div><div class="line">  path: baidusitemap.xml</div></pre></td></tr></table></figure>
+<p>这样，就可以通过 <a href="http://url/sitemap.xml" target="_blank" rel="external">http://url/sitemap.xml</a> 和 <a href="http://url/baidusitemap.xml" target="_blank" rel="external">http://url/baidusitemap.xml</a> 访问到网站的sitemap了，只要将以上地址提交到google和百度，即可加速搜索引擎抓取，优化网站的收录。</p>
+<h1 id="Feed"><a href="#Feed" class="headerlink" title="Feed"></a>Feed</h1><p>为了给用户提供订阅，可以生成Feed文件，首先要执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-generator-feed --save</div></pre></td></tr></table></figure>
+<p>然后在根目录_config.yml文件中，添加以下配置信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">feed:</div><div class="line">  type: atom</div><div class="line">  path: atom.xml</div><div class="line">  limit: 50</div><div class="line">  hub:</div></pre></td></tr></table></figure>
+<p>这样，就可以通过 <a href="http://url/atom.xml" target="_blank" rel="external">http://url/atom.xml</a> 访问到网站的订阅Feed了。</p>
+<h1 id="HTTPS配置"><a href="#HTTPS配置" class="headerlink" title="HTTPS配置"></a>HTTPS配置</h1><p>如果申请了Github Pages空间只好没有设置自定义域名，那么可以直接使用<your user="" name="">.github.io访问网站，并且可以启用enforce https选项强制所有用户使用https访问。但是设置自定义域名之后，必须采用一些其他方式，这里我们采用的是cloudflare免费CDN功能。</your></p>
+<p>CloudFlare提供用户免费的CDN加速功能，并且支持HTTPS加速，所以，我们先申请一个cloudflare的账号，添加域名，然后到原域名供应商处将其dns服务器设置为cloudflare的dns服务器：kai.ns.cloudflare.com 和     naomi.ns.cloudflare.com 。然后将原来的dns record全都转移过来，同时，对于指向github pages的域名对应的两条A记录，启用CDN功能，这样，所有访问您github pages网站的请求，都会被cloudflare中转加速，免费的账户支持添加三条page rules，我们添加一条即可，配置域名，选择always use https，同时启用该条规则，这样，所有访问http的请求，都会被强制转向https，此处的https证书是cloudflare免费提供的，用户不必担心使用有效期，也不必承担费用。</p>
+<p>同时，cloudflare还有很多高级功能可以免费使用，比如访问统计，防火墙，数据分析等，大家可以慢慢摸索。</p>
+<h1 id="Ending"><a href="#Ending" class="headerlink" title="Ending"></a>Ending</h1><p>至此，所有的配置工作都已经完成，可以愉快的进行写作了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://menglei.tk/2016/10/24/hexo/" data-id="ciy3vf1ri000jfn1niyt3k3xb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/备忘/">备忘</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-nginx" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/21/nginx/" class="article-date">
+  <time datetime="2016-10-21T16:20:02.000Z" itemprop="datePublished">2016-10-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/server/">server</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/21/nginx/">Nginx安装配置备忘</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://nginx.org/" target="_blank" rel="external">Nginx</a>是一个俄罗斯开发的高性能HTTP服务器和反向代理服务器，功能丰富、性能强悍、运行稳定、应用广泛，完全使用C语言编写，可运行于各种Unix Like OS，并有Windows移植版本(不推荐用于生产环境)。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在Ubuntu中，可以直接使用<code>sudo apt-get install nginx</code> 命令安装nginx，安装之后，默认的配置文件保存在 <code>/etc/nginx</code> 文件夹内，默认提供http服务的目录位置在 <code>/usr/local/nginx/html</code>。</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>nginx的主配置文件是：nginx.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">user www-data;  #用户与用户组</div><div class="line">worker_processes 4;  #对外提供服务的worker进程数量，取值取决因素包括（但不限于）CPU核的数量、存储数据的硬盘数量及负载模式。默认可设置为CPU内核数或者可设置为“auto”。</div><div class="line">worker_rlimit_nofile 30000;   #worker进程最大打开文件数量限制</div><div class="line">pid /var/run/nginx.pid;     #pid文件保存位置</div><div class="line"></div><div class="line">events &#123;</div><div class="line">        worker_connections 10000;   #单个worker可以最大打开的连接数</div><div class="line">        # multi_accept on;    #收到一个新连接通知后是否接受尽可能多的连接</div><div class="line">&#125;</div><div class="line">http &#123;</div><div class="line"></div><div class="line">        ##</div><div class="line">        # Basic Settings</div><div class="line">        ##</div><div class="line"></div><div class="line">        sendfile on;     #sendfile特性，提高文件访问的效率</div><div class="line">        tcp_nopush on;   #在一个tcp数据包里发送所有的头文件</div><div class="line">        tcp_nodelay on;  #不要缓存数据，立即发送</div><div class="line">        keepalive_timeout 65;    #客户端keep-alive连接的超时时间</div><div class="line">        types_hash_max_size 2048;</div><div class="line">        # server_tokens off;   #是否关闭错误页面中的nginx版本显示</div><div class="line"></div><div class="line">        # server_names_hash_bucket_size 64;</div><div class="line">        # server_name_in_redirect off;</div><div class="line"></div><div class="line">        include /etc/nginx/mime.types;   #特定后缀使用mime types的配置</div><div class="line">        default_type application/octet-stream;   #默认文件mime types</div><div class="line">        client_max_body_size 200m;      #上传文件最大体积</div><div class="line"></div><div class="line">        ##</div><div class="line">        # Logging Settings</div><div class="line">        ##</div><div class="line">        </div><div class="line">        access_log off;   #访问日志记录文件路径</div><div class="line">        error_log /var/log/nginx/error.log;    #错误日志记录文件</div><div class="line"></div><div class="line">        ##</div><div class="line">        # Gzip Settings</div><div class="line">        ##</div><div class="line"></div><div class="line">        gzip on;    #是否启用gzip压缩(可减少流量，增大服务器负载)</div><div class="line">        gzip_disable &quot;msie6&quot;;    #指定客户端禁用gzip</div><div class="line"></div><div class="line">        gzip_vary on;</div><div class="line">        gzip_proxied any;  #允许或者禁止压缩基于请求和响应的响应流。设置为any，意味着将会压缩所有的请求。</div><div class="line">        gzip_comp_level 6;  #压缩等级</div><div class="line">        # gzip_buffers 16 8k;</div><div class="line">        # gzip_http_version 1.1;</div><div class="line">        gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript; #设置需要压缩的数据格式</div><div class="line"></div><div class="line">        server&#123;  #服务器配置</div><div class="line">            listen  80; #端口</div><div class="line">            server_name  example.com;  #域名  </div><div class="line">            location / &#123;</div><div class="line">                root /usr/local/nginx/html;  #根目录</div><div class="line">                index index.html index.htm index.php;  #默认主页文件</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">        ##</div><div class="line">        # Virtual Host Configs</div><div class="line">        ##</div><div class="line"></div><div class="line">        include /etc/nginx/conf.d/*.conf;    #配置</div><div class="line">        include /etc/nginx/sites-enabled/*;  #virutal host配置</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="virutal-host-配置"><a href="#virutal-host-配置" class="headerlink" title="virutal host 配置"></a>virutal host 配置</h1><p>nginx作为反向代理服务器，可以根据域名不同将用户的请求分发给不同的后端服务器，配置文件放置在site-available目录中，如果要启用某一个特定的配置文件，需要在site-enabled目录中建立一个对应的软连接。</p>
+<p>我们想要配置一个<code>api.example.com</code>的虚拟服务器，将特定/api路径下的所有请求转发到后端的api服务器，其他请求直接访问对应的静态文件目录，同时支持HTTP和HTTPS访问，配置如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    server_name api.example.com;  #域名，只有访问这个域名的请求才会被转发到这里</div><div class="line">    listen 80;  #监听端口</div><div class="line">    listen 443 ssl;   #HTTPS监听端口</div><div class="line">    ssl on;   #是否启用HTTPS</div><div class="line">    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;   #HTTPS证书公钥地址，此处为Let&apos;s Encrypt申请的证书</div><div class="line">    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem; #HTTPS证书私钥地址，此处为Let&apos;s Encrypt申请的证书</div><div class="line">    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;   #HTTPS协议版本</div><div class="line">    ssl_prefer_server_ciphers on;   #服务器加密优先于客户端加密</div><div class="line">    ssl_ciphers &apos;EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH&apos;;   #加密算法</div><div class="line">    location ^~ /api/ &#123;  #所有匹配到/api路径下的访问，全部转发</div><div class="line">        proxy_pass http://127.0.0.1:8051/rest/;</div><div class="line">        proxy_set_header Host $http_host;  #转发的请求，HOST取值为客户端访问的host值</div><div class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;  #增加x-Forwarded-for</div><div class="line">        proxy_set_header X-Real-IP $remote_addr;  #增加x-real-ip，取值为访问用户的真实IP，供后端获取客户IP使用</div><div class="line">    &#125;</div><div class="line">    location = /upload &#123;  #只有访问路径等于 /upload 的请求，才会转发到这里</div><div class="line">        proxy_pass http://127.0.0.1:8052/upload/;</div><div class="line">        proxy_set_header Host $http_host;</div><div class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">        proxy_set_header X-Real-IP $remote_addr;</div><div class="line">        client_max_body_size 200m;  #设置最大上传文件体积，单位可以是k、m、g</div><div class="line">    &#125;</div><div class="line">    location ~ /.well-known &#123;   #letsencrypt申请证书验证域名使用的配置目录</div><div class="line">        root /usr/share/nginx/.well-known;</div><div class="line">        index index.html;</div><div class="line">    &#125;</div><div class="line">    location / &#123;  #所有不匹配上面各种条件的请求，都转发到这里</div><div class="line">        root /var/webroot;</div><div class="line">        index index.html index.htm;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>将以上配置保存为 /etc/nginx/sites-available 目录中的 api.example 文件，然后进入site-enabled目录，执行 <code>ln -s ../sites-available/api.example api.example</code> 在sites-enabled中建立其对应的软连接，然后执行 <code>service nginx reload</code> 重新加载nginx的配置，即可生效。</p>
+<h1 id="nginx配置强制跳转HTTPS"><a href="#nginx配置强制跳转HTTPS" class="headerlink" title="nginx配置强制跳转HTTPS"></a>nginx配置强制跳转HTTPS</h1><p>很多网站都要求所有HTTP的访问都强制跳转到HTTPS，其配置方法有很多种，可以按照以下配置思路：</p>
+<p>我们有一个仅支持HTTPS访问的配置好的virtual host：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    server_name www.example.com;</div><div class="line">    listen 443 ssl;</div><div class="line">    ssl on;</div><div class="line">    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;</div><div class="line">    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;</div><div class="line">    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</div><div class="line">    ssl_prefer_server_ciphers on;</div><div class="line">    ssl_ciphers &apos;EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH&apos;;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        root /var/webroot;</div><div class="line">        index index.htm index.html;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>新建一个配置文件www.redirect：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    server_name www.example.com;</div><div class="line">    listen 80;</div><div class="line">    location ~ /.well-known &#123; #letsencrypt申请证书验证域名使用的配置目录</div><div class="line">        root /usr/share/nginx/.well-known;</div><div class="line">        index index.html;</div><div class="line">    &#125;</div><div class="line">    location / &#123; #默认请求</div><div class="line">        root /noexists;  #一个不存在的目录</div><div class="line">        index index.html;  </div><div class="line">    &#125;</div><div class="line">    error_page 404 https://www.example.com/;  #访问文件不存在时，跳转的链接</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在sites-enabled 目录中为以上配置文件设置一个软链接，然后reload nginx即可。</p>
+<p>其思路主要是利用了nginx的404页面，我们为http server配置了一个不存在的路径，这样在访问http服务器的时候，其index.html文件是不存在的，这样nginx就会给用户返回特定的404 Not Found 页面，我们将对应的HTTPS链接指定为其对应的404页面，这样在访问http server的时候，就会被自动redirect到相应的HTTPS页面了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://menglei.tk/2016/10/21/nginx/" data-id="ciy3vf1qt0005fn1nc0cmijtj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTPS/">HTTPS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx/">Nginx</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-certbot" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/18/certbot/" class="article-date">
+  <time datetime="2016-10-18T16:25:00.000Z" itemprop="datePublished">2016-10-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/server/">server</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/18/certbot/">Let&#39;s Encrypt 配置过程记录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Let’s Encrypt 是一个免费的SSL证书机构，可以通过Certbot工具进行申请。</p>
+<p>Let’s Encrypt 网站： <a href="https://letsencrypt.org/" target="_blank" rel="external">https://letsencrypt.org/</a></p>
+<p>Certbot 网站： <a href="https://certbot.eff.org/" target="_blank" rel="external">https://certbot.eff.org/</a></p>
+<p>Certbot Github： <a href="https://github.com/certbot/certbot" target="_blank" rel="external">https://github.com/certbot/certbot</a></p>
+<p>测试环境： Ubuntu 14.04， python 2.7， nginx 1.4.6</p>
+<h2 id="申请过程"><a href="#申请过程" class="headerlink" title="申请过程"></a>申请过程</h2><h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h3><p>首先要保证电脑中已经安装了git和nginx，并且能够正确运行。</p>
+<p>安装certbot可以从github上面clone，或者直接从官方提供的下载地址进行下载。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget https://dl.eff.org/certbot-auto</div><div class="line">chmod a+x certbot-auto</div></pre></td></tr></table></figure>
+<h3 id="2-配置"><a href="#2-配置" class="headerlink" title="2.配置"></a>2.配置</h3><p>上面下载到的是一个自动安装脚本，运行这个脚本，会自动下载并安装所需要的各种依赖，下载完成之后，我们可以再次运行这个脚本进行证书的申请。但是，此时可以先创建一个配置文件，省去每次都要输入一长串命令的麻烦。Certbot的配置文件默认存放位置是/etc/letsencrypt/，默认的文件名是cli.ini，所以我们创建一个文件/etc/letencrypt/cli.ini，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">rsa-key-size = 2048  //密钥长度，2048足够</div><div class="line"></div><div class="line">email = foo@example.com  //您的邮箱地址</div><div class="line"></div><div class="line">domains = example.com, www.example.com  //要申请证书的域名，多个域名用逗号分隔</div><div class="line"></div><div class="line">text = True  //是否使用文字交互，如果选false，将使用ncurses交互</div><div class="line"></div><div class="line">authenticator = webroot  //域名的验证方式</div><div class="line">webroot-path = /usr/share/nginx/html   //指定http服务器的root文件夹</div></pre></td></tr></table></figure>
+<h3 id="3-申请"><a href="#3-申请" class="headerlink" title="3.申请"></a>3.申请</h3><p>只要执行 <code>certbot --config /etc/letsencrypt/cli.ini</code> 即可按照cli.ini中的配置内容进行申请证书的操作，申请成功之后，证书文件会存放在 <code>/etc/letsencrypt/archive/example.com</code> 文件夹中，同时，在 <code>/etc/letencrypt/live/example.com/</code> 中，会有相应的软连接，我们在使用的时候，可以直接利用软连接即可，避免续期之后的证书文件名变更导致nginx配置出错。</p>
+<h3 id="4-使用"><a href="#4-使用" class="headerlink" title="4.使用"></a>4.使用</h3><p>在nginx的ssl配置时，按照如下配置即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssl_certificate /etc/letsencrypt/live/appinn.com/fullchain.pem;</div><div class="line">ssl_certificate_key /etc/letsencrypt/live/appinn.com/privkey.pem;</div></pre></td></tr></table></figure>
+<h3 id="5-续期"><a href="#5-续期" class="headerlink" title="5.续期"></a>5.续期</h3><p>由于Let’s Encrypt 证书的有效期只有三个月，我们必须在到期之前对其进行续期。续期的操作是执行命令行 <code>certbot-auto renew</code>。我们可以创建定时任务，保证服务可以一直有效。</p>
+<p>运行 <code>crontab -e</code> ，同时在下面加入一行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">00 3 * * 0 certbot-auto renew</div><div class="line">01 3 * * 0 service nginx reload</div></pre></td></tr></table></figure>
+<p>每周日凌晨三点钟运行续期服务，如果证书即将到期，即可自动对证书进行续期三个月，同时三点零一分会自动重新加载nginx，使得新申请的证书生效。</p>
+<p>这样，HTTPS部分就已经配置完成并且不需要任何操作了，只要服务器一直在运行并且Let’s Encrypt 服务没有出意外，我们的HTTPS就会一直有效下去。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://menglei.tk/2016/10/18/certbot/" data-id="ciy3vf1qi0002fn1nvnuks5wq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTPS/">HTTPS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx/">Nginx</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/memo/">memo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/server/">server</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitLab/">GitLab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/">HTTPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSocket/">WebSocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备忘/">备忘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/资源/">资源</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/GIT/" style="font-size: 16.67px;">GIT</a> <a href="/tags/GitLab/" style="font-size: 10px;">GitLab</a> <a href="/tags/HTTPS/" style="font-size: 13.33px;">HTTPS</a> <a href="/tags/Nginx/" style="font-size: 13.33px;">Nginx</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/备忘/" style="font-size: 20px;">备忘</a> <a href="/tags/持续集成/" style="font-size: 13.33px;">持续集成</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/01/18/gitlab-runner/">安装Gitlab Runner</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/17/gitlab/">关于Gitlab服务器的搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/02/nginx-websocket/">WebSocket的实现以及通过Nginx进行反向代理</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/12/gitlab-pages/">使用Gitlab Pages建立个人博客</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/05/travis/">Use Hexo With Travis Ci</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Meng Lei<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

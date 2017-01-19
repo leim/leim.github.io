@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>安装Gitlab Runner | MengLei Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Gitlab CI 简介Gitlab中集成了CI (Continuous Integration：持续集成) 和CD (Continuous Delivery：持续交付) 来方便用户测试、构建、部署代码。它是Gitlab的一部分，用户可以在 Gitlab.com 上免费使用，同时也包含在了开源的Gitlab社区版和付费的Gitlab企业版中。
+Gitlab CI具有如下特性：
+多平台：您可以在任何">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安装Gitlab Runner">
+<meta property="og:url" content="https://menglei.tk/2017/01/18/gitlab-runner/index.html">
+<meta property="og:site_name" content="MengLei Site">
+<meta property="og:description" content="Gitlab CI 简介Gitlab中集成了CI (Continuous Integration：持续集成) 和CD (Continuous Delivery：持续交付) 来方便用户测试、构建、部署代码。它是Gitlab的一部分，用户可以在 Gitlab.com 上免费使用，同时也包含在了开源的Gitlab社区版和付费的Gitlab企业版中。
+Gitlab CI具有如下特性：
+多平台：您可以在任何">
+<meta property="og:updated_time" content="2017-01-19T04:21:28.601Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安装Gitlab Runner">
+<meta name="twitter:description" content="Gitlab CI 简介Gitlab中集成了CI (Continuous Integration：持续集成) 和CD (Continuous Delivery：持续交付) 来方便用户测试、构建、部署代码。它是Gitlab的一部分，用户可以在 Gitlab.com 上免费使用，同时也包含在了开源的Gitlab社区版和付费的Gitlab企业版中。
+Gitlab CI具有如下特性：
+多平台：您可以在任何">
+  
+    <link rel="alternate" href="/atom.xml" title="MengLei Site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">MengLei Site</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A place to memorize something.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://menglei.tk"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-gitlab-runner" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/18/gitlab-runner/" class="article-date">
+  <time datetime="2017-01-18T11:56:32.000Z" itemprop="datePublished">2017-01-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/memo/">memo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      安装Gitlab Runner
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Gitlab-CI-简介"><a href="#Gitlab-CI-简介" class="headerlink" title="Gitlab CI 简介"></a>Gitlab CI 简介</h1><p>Gitlab中集成了CI (Continuous Integration：持续集成) 和CD (Continuous Delivery：持续交付) 来方便用户测试、构建、部署代码。它是Gitlab的一部分，用户可以在 <a href="https://gitlab.com/" target="_blank" rel="external">Gitlab.com</a> 上免费使用，同时也包含在了开源的Gitlab社区版和付费的Gitlab企业版中。</p>
+<h2 id="Gitlab-CI具有如下特性："><a href="#Gitlab-CI具有如下特性：" class="headerlink" title="Gitlab CI具有如下特性："></a>Gitlab CI具有如下特性：</h2><ul>
+<li><strong>多平台</strong>：您可以在任何支持Go语言的平台上运行，例如：Unix、Windows、OSX等。</li>
+<li><strong>多语言</strong>：构建脚本是通过命令行驱动的，可以支持诸如Java、PHP、Ruby、C等任何语言。</li>
+<li><strong>稳定</strong>：您的构建操作可以运行在其他机器上，而不是Gitlab上。</li>
+<li><strong>并行构建</strong>：为了加快构建速度，Gitlab CI将任务分别运行在多个不同机器上。</li>
+<li><strong>实时日志</strong>：可以通过链接查看到实时更新的构建日志。</li>
+<li><strong>版本化的测试</strong>：每个人都可以对<code>.gitlab-ci.yml</code>文件提交修改以确保每个分支都能够得到所需要的测试。</li>
+<li><strong>管道</strong>：您可以为每个阶段定义多个任务并且触发其他构建操作。</li>
+<li><strong>弹性运行</strong>：可以自动增加或者减少虚拟机的数量以保证所有的构建操作都立即执行并且代价最小。</li>
+<li><strong>编译好的文件</strong>：您可以上传二进制代码以及其他编译好的文件，并且能够浏览以及下载他们。</li>
+<li><strong>本地测试</strong>：Gitlab中有多个线程池，您可以利用它们运行本地测试。</li>
+<li><strong>Docker支持</strong>：您可以很容易的将其他的Docker容器服务集成进来作为测试的一部分，并且能够构建docker镜像。</li>
+</ul>
+<p>Gitlab CI是Gitlab的一部分，它是一个带有api的web应用程序，可以将运行状态都保存在数据库中，除了Gitlab的功能外，它也能管理项目的构建过程，并且提供了一个很友好的用户界面。</p>
+<p>Gitlab Runner是一个执行构建操作的应用程序，他能够被单独部署到其他机器上，通过API与Gitlab CI协作运行。Gitlab Runner可以被部署到任何支持Go语言二进制文件运行的环境中，例如Linux、OSX、Windows、FreeBSD以及Docker。它也能够测试任何编程语言书写的代码，例如.Net、Java、Python、C、PHP等等。</p>
+<p>为了运行测试功能，您需要至少一个Gitlab实例和一个Gitlab Runner。</p>
+<h1 id="安装Gitlab-Runner"><a href="#安装Gitlab-Runner" class="headerlink" title="安装Gitlab Runner"></a>安装Gitlab Runner</h1><p>安装Gitlab Runner可以有三种方法，通过Docker安装、下载二进制文件手动安装以及使用Gitlab提供的rpm/deb包通过包管理系统进行安装。我们使用第三种方式，也是Gitlab官方推荐的安装方式，目前Gitlab支持Debian、Ubuntu、RHEL以及CentOS的包管理工具安装。</p>
+<p>如果您想使用Docker runner，那么必须要在安装Gitlab Runner之前安装它。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -sSL https://get.docker.com/ | sh</div></pre></td></tr></table></figure></p>
+<p>通过 apt-get 或者 yum 添加Gitlab官方软件源。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># For Debian/Ubuntu</div><div class="line">curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-ci-multi-runner/script.deb.sh | sudo bash</div><div class="line"></div><div class="line"># For RHEL/CentOS</div><div class="line">curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-ci-multi-runner/script.rpm.sh | sudo bash</div></pre></td></tr></table></figure></p>
+<h3 id="覆盖APT设置-仅Debian系统"><a href="#覆盖APT设置-仅Debian系统" class="headerlink" title="覆盖APT设置-仅Debian系统"></a>覆盖APT设置-仅Debian系统</h3><p>自从Debian Stretch开始，Debian维护者添加了一个和我们软件包具有相同名称的一个他们的官方软件包，并且默认情况下官方的软件仓库拥有优先权，如果您想使用Gitlab的软件包，那么必须手动设置软件包的安装源，最佳方法就是添加一个额外的配置文件覆盖掉原来的配置。接下来的每一个版本的更新，无论是手动更新还是自动更新，都将会使用同样的软件源。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cat &gt; /etc/apt/preferences.d/pin-gitlab-runner.pref &lt;&lt;EOF</div><div class="line">Explanation: Prefer GitLab provided packages over the Debian native ones</div><div class="line">Package: gitlab-ci-multi-runner</div><div class="line">Pin: origin packages.gitlab.com</div><div class="line">Pin-Priority: 1001</div><div class="line">EOF</div></pre></td></tr></table></figure>
+<p># </p>
+<h3 id="安装gitlab-ci-multi-runner："><a href="#安装gitlab-ci-multi-runner：" class="headerlink" title="安装gitlab-ci-multi-runner："></a>安装<code>gitlab-ci-multi-runner</code>：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># For Debian/Ubuntu</div><div class="line">sudo apt-get install gitlab-ci-multi-runner</div><div class="line"></div><div class="line"># For RHEL/CentOS</div><div class="line">sudo yum install gitlab-ci-multi-runner</div></pre></td></tr></table></figure>
+<h3 id="注册runner"><a href="#注册runner" class="headerlink" title="注册runner"></a>注册runner</h3><p>此处需要使用一个token，使用管理员账号登陆gitlab并到<code>http://gitlab.exmaple.com/admin/runners</code> 可以查到，详细的说明可以通过查阅 <a href="http://doc.gitlab.com/ce/ci/runners/README.html" target="_blank" rel="external">runner文档</a> 学习。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">sudo gitlab-ci-multi-runner register</div><div class="line"></div><div class="line">Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com )</div><div class="line">https://gitlab.com</div><div class="line">Please enter the gitlab-ci token for this runner</div><div class="line">xxx</div><div class="line">Please enter the gitlab-ci description for this runner</div><div class="line">my-runner</div><div class="line">INFO[0034] fcf5c619 Registering runner... succeeded</div><div class="line">Please enter the executor: shell, docker, docker-ssh, ssh?</div><div class="line">docker</div><div class="line">Please enter the Docker image (eg. ruby:2.1):</div><div class="line">ruby:2.1</div><div class="line">INFO[0037] Runner registered successfully. Feel free to start it, but if it&apos;s</div><div class="line">running already the config should be automatically reloaded!</div></pre></td></tr></table></figure>
+<p>执行完上述命令之后，使用管理员账号登陆gitlab并到<code>http://gitlab.exmaple.com/admin/runners</code>即可查看到已经注册好的gitlab runner。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://menglei.tk/2017/01/18/gitlab-runner/" data-id="ciy3vf1rn000qfn1nlala78ob" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GIT/">GIT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/备忘/">备忘</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/持续集成/">持续集成</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/01/17/gitlab/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">关于Gitlab服务器的搭建</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/memo/">memo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/server/">server</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitLab/">GitLab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTPS/">HTTPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSocket/">WebSocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备忘/">备忘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/资源/">资源</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/GIT/" style="font-size: 16.67px;">GIT</a> <a href="/tags/GitLab/" style="font-size: 10px;">GitLab</a> <a href="/tags/HTTPS/" style="font-size: 13.33px;">HTTPS</a> <a href="/tags/Nginx/" style="font-size: 13.33px;">Nginx</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/备忘/" style="font-size: 20px;">备忘</a> <a href="/tags/持续集成/" style="font-size: 13.33px;">持续集成</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/01/18/gitlab-runner/">安装Gitlab Runner</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/17/gitlab/">关于Gitlab服务器的搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/02/nginx-websocket/">WebSocket的实现以及通过Nginx进行反向代理</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/12/gitlab-pages/">使用Gitlab Pages建立个人博客</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/05/travis/">Use Hexo With Travis Ci</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Meng Lei<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
