@@ -52,10 +52,40 @@ var io = require('socket.io')(server);
 io.on('connection', function (client) {
     client.emit('data', 'Hello WebSocket.');
 });
-server.listen(3000);
+server.listen(3000);    //监听3000端口
 ```
 
 我们打开控制台，访问html页面，即可在控制台看到输出的`Hello WebSocket`字样，即表明服务端已经具备向客户端推送数据的能力。
 
 # Nginx反向代理WebSocket
 
+反向代理(Reverse Proxy)是指代理服务器接受互联网上的请求，将请求转发给内部服务器并将结果返回给外部客户端，使用反向代理服务器，有以下几点好处：
+- 可以保护网站安全，所有的访问请求都是先经过代理服务器，然后才到达真正的服务器，如果有网络攻击，可以直接在代理服务器上进行屏蔽，不影响后端真正服务器的运行。
+- 可以将后端服务器上的资源进行缓存，实现某些静态资源的加速访问，减轻后端服务器的负载压力。
+- 充当负载均衡服务器，将访问请求平均地分发给后端服务器，同时自动剥离故障服务器，保证服务平稳运行。
+
+`Nginx`是一款优秀的轻量级网页服务器，同时也支持反向代理服务器功能，在这里，我们将使用Nginx作为HTTP和WebSocket的反向代理服务器，只要在Nginx的配置文件中添加以下项目即可。
+
+```
+server {
+    listen       80;
+    server_name  localhost;
+    #access_log  logs/host.access.log  main;
+    location / {
+        proxy_pass http://127.0.0.1:3000/;
+        proxy_set_header Host $http_host;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Read-IP $remote_addr;
+    }
+    #error_page  404              /404.html;
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   html;
+    }
+}
+```
+
+至此，我们只要通过80端口即可访问我们的WebSocket demo了。
