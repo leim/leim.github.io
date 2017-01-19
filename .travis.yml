@@ -10,6 +10,7 @@ script:
   - hexo g
  
 after_script:
+  - cp .gitlab-ci.yml ./public
   - cd ./public
   - git init
   - git config user.name "leim"

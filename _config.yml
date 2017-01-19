@@ -31,6 +31,7 @@ skip_render:
   - googlebe6df1fd8ea2ce83.html
   - BingSiteAuth.xml
   - pubstorm.json
+  - .gitlab-ci.yml
 
 # Writing
 new_post_name: :year-:month-:day-:title.md # File name of new posts
